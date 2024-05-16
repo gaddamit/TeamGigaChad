@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 /// <summary>
 /// JumpBall implements IButtonlistener, an interface, which means that it has to implement those functions
@@ -14,7 +15,17 @@ public class JumpBall : MonoBehaviour, IButtonListener
     private ButtonInfo _currentButton;
     
     private PlayerInputs inputObject;
+    private bool _isJumping = false;
+    [SerializeField]
+    private float _jumpDistance = 1f;
     
+    enum State
+    {
+        Forwards,
+        Upwards,
+        Downwards,
+    }    
+    private State _state = State.Forwards;
     void Awake()
     {
         _currentButton.CurrentState = ButtonState.Released;
@@ -24,17 +35,53 @@ public class JumpBall : MonoBehaviour, IButtonListener
         _rb.velocity = new Vector2(0, -jumpForce);
     }
 
+    private float _startJumpCounter = 5;
+    private void Start()
+    {
+        InvokeRepeating("StartJump", 2, 1);
+    }
+
+    private void StartJump()
+    {
+        _startJumpCounter--;
+        transform.DOJump(transform.position, 1, 1, 1);
+        if(_startJumpCounter == 0)
+        {
+            CancelInvoke("StartJump");
+            InvokeRepeating("JumpForward", 1, 1);
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
         
     }
 
+    private void JumpForward()
+    {
+        transform.DOJump(transform.position + Vector3.right * _jumpDistance, 1, 1, 1);
+    }
+
     private void FixedUpdate()
     {
-        if (_currentButton.CurrentState == ButtonState.Released)
+        if (_currentButton.CurrentState == ButtonState.Pressed)
         {
-            _rb.velocity = new Vector2(0, _rb.velocity.y - jumpSpeedIncrease * Time.fixedDeltaTime);
+            switch(_state)
+            {
+                case State.Forwards:
+                    //JumpForward();
+                    _state = State.Upwards;
+                    break;
+                case State.Upwards:
+                   // JumpUp();
+                    _state = State.Downwards;
+                    break;
+                case State.Downwards:
+                    //JumpDown();
+                    _state = State.Forwards;
+                    break;
+            }
         }
     }
 
@@ -44,7 +91,7 @@ public class JumpBall : MonoBehaviour, IButtonListener
             _rb.velocity = new Vector2(0, _rb.velocity.y + jumpSpeedIncrease * Time.fixedDeltaTime);
         else 
             _rb.velocity = new Vector2(0, 0);
-        
+        _currentButton = heldInfo;
     }
 
     public void ButtonPressed(ButtonInfo pressedInfo)

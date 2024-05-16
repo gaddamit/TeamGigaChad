@@ -8,4 +8,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Example/OneButtonScene.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
+  - enabled: 1
+    path: Assets/UI/MainMenu.unity
+    guid: e34529b460479bd46b46b651dec73b67
   m_configObjects: {}

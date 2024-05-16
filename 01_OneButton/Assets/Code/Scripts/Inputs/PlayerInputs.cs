@@ -31,7 +31,7 @@ public class PlayerInputs : MonoBehaviour
                     { ButtonID = _buttonInputs.Count, TimeStarted = Time.time, CurrentTime = Time.time, CurrentState= ButtonState.Pressed};
                 _buttonInputs.Add(_currentButton);
                 _buttonPressed.Invoke(new ButtonInfo());
-                StartCoroutine(ButtonHeld());
+                //StartCoroutine(ButtonHeld());
                 
             };
             _gameInputs.PlayerControl.Interact.canceled += (val) =>

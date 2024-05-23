@@ -45,3 +45,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Rocks
+    uniqueID: 3067534255
+    locked: 0
+  - name: Crabs
+    uniqueID: 548343859
+    locked: 0
+  - name: Player
+    uniqueID: 3689804073
+    locked: 0

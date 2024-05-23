@@ -1,5 +1,6 @@
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// JumpBall implements IButtonlistener, an interface, which means that it has to implement those functions
@@ -17,6 +18,8 @@ public class JumpBall : MonoBehaviour, IButtonListener
     [SerializeField]
     private float _jumpDistance = 1f;
     
+    [SerializeField]
+    private PauseMenu _pauseMenu;
     enum State
     {
         Forwards,
@@ -28,6 +31,10 @@ public class JumpBall : MonoBehaviour, IButtonListener
     private State _state = State.Forwards;
 
     private int _buttonPressCounter = 0;
+    private int _yLimit = 0;
+    private bool _isDead = false;
+    private bool _isComplete = false;
+    private bool _isHittingObstacle = false;
 
     void Awake()
     {
@@ -88,6 +95,13 @@ public class JumpBall : MonoBehaviour, IButtonListener
 
     private void ConsumeInput()
     {
+        if(_isHittingObstacle && !_pauseMenu.isActiveAndEnabled)
+        {
+            _isDead = true;
+            _pauseMenu.Pause(true);
+            return;
+        }
+
         _state = State.Forwards;
         
         if(_buttonPressCounter > 0)
@@ -95,11 +109,19 @@ public class JumpBall : MonoBehaviour, IButtonListener
             if(_buttonPressCounter % 2 == 0)
             {
                 _state = State.Upwards;
+                _yLimit++;
             }
             else
             {
                 _state = State.Downwards;
+                _yLimit--;
             }
+        }
+
+        if(_yLimit < -3 || _yLimit > 4)
+        {
+            _state = State.Forwards;
+            Debug.Log("Game Over");
         }
 
         _buttonPressCounter = 0;
@@ -132,19 +154,47 @@ public class JumpBall : MonoBehaviour, IButtonListener
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        if(_isDead || _isComplete)
+        {
+            return;
+        }
+
         if(other.CompareTag("Crab"))
         {
-            Debug.Log("Crab hit");
+            _isHittingObstacle = true;
         }
 
         if(other.CompareTag("Rock"))
         {
-            Debug.Log("Rock hit");
+            _isHittingObstacle = true;
         }
 
         if(other.CompareTag("FinishLine"))
         {
-            Debug.Log("Coin hit");
+            _inputEnabled = false;
+            _isComplete = true;
+
+            int index = SceneManager.GetActiveScene().buildIndex + 1;
+            string name = UnityEngine.SceneManagement.SceneUtility.GetScenePathByBuildIndex( index );
+            Initiate.Fade(name, Color.black, 1);
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if(_isDead || _isComplete)
+        {
+            return;
+        }
+
+        if(other.CompareTag("Crab"))
+        {
+            _isHittingObstacle = false;
+        }
+
+        if(other.CompareTag("Rock"))
+        {
+            _isHittingObstacle = false;
         }
     }
 }

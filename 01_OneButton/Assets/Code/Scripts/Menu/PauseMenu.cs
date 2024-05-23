@@ -1,20 +1,32 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PauseMenu : MonoBehaviour
 {
 
    [SerializeField] GameObject pauseMenu;
-   public void Pause()
+   [SerializeField] Button resumeButton;
+   [SerializeField] TMP_Text pauseMessage;
+   public void Pause(bool isDead = false)
     {
         pauseMenu.SetActive(true);
         Time.timeScale = 0;
+
+        pauseMessage.text = isDead ? "U DIED" : "PAUSED";
+        if(isDead)
+            resumeButton.interactable = false;
+        else
+            resumeButton.interactable = true;
     }
     public void Home()
     {
-        SceneManager.LoadSceneAsync(0);
+        int index = 0;
+        string name = UnityEngine.SceneManagement.SceneUtility.GetScenePathByBuildIndex( index );
+        Initiate.Fade(name, Color.black, 1);
         Time.timeScale = 1;
     }
     public void Resume()
@@ -24,7 +36,10 @@ public class PauseMenu : MonoBehaviour
     }
     public void Restart()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        int index = SceneManager.GetActiveScene().buildIndex;
+        string name = UnityEngine.SceneManagement.SceneUtility.GetScenePathByBuildIndex( index );
+        Initiate.Fade(name, Color.black, 1);
+
         Time.timeScale = 1;
     }
 }

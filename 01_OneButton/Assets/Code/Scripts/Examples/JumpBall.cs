@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 /// <summary>
 /// JumpBall implements IButtonlistener, an interface, which means that it has to implement those functions
 /// </summary>
-public class JumpBall : MonoBehaviour, IButtonListener
+public class JumpBall : MonoBehaviour
 {
     [SerializeField] private float jumpForce = 3f;
     [SerializeField] private float maxHeight = 5f;
@@ -41,7 +41,7 @@ public class JumpBall : MonoBehaviour, IButtonListener
         _currentButton.CurrentState = ButtonState.Released;
         _rb = GetComponent<Rigidbody2D>();
         var inputObject = FindObjectOfType<PlayerInputs>();
-        inputObject.RegisterListener(this);
+        //inputObject.RegisterListener(this);
         _rb.velocity = new Vector2(0, -jumpForce);
     }
 
@@ -125,31 +125,6 @@ public class JumpBall : MonoBehaviour, IButtonListener
         }
 
         _buttonPressCounter = 0;
-    }
-
-    private void FixedUpdate()
-    {
-    }
-
-    public void ButtonHeld(ButtonInfo heldInfo)
-    {
-        if(this.transform.position.y < maxHeight)
-            _rb.velocity = new Vector2(0, _rb.velocity.y + jumpSpeedIncrease * Time.fixedDeltaTime);
-        else 
-            _rb.velocity = new Vector2(0, 0);
-        _currentButton = heldInfo;
-    }
-
-    public void ButtonPressed(ButtonInfo pressedInfo)
-    {
-        _rb.velocity = new Vector2(0, _rb.velocity.y + jumpForce);
-        _currentButton = pressedInfo;
-    }
-
-    public void ButtonReleased(ButtonInfo releasedInfo)
-    {
-        _rb.velocity = new Vector2(0, -jumpForce);
-        _currentButton = releasedInfo;
     }
 
     private void OnTriggerEnter2D(Collider2D other)

@@ -95,7 +95,7 @@ public class JumpBall : MonoBehaviour
 
     private void ConsumeInput()
     {
-        Debug.Log("Consume Input " + _isHittingObstacle);
+        //Debug.Log("Consume Input " + _isHittingObstacle);
         if(_isHittingObstacle != 0 && !_pauseMenu.isActiveAndEnabled)
         {
             _isDead = true;
@@ -154,7 +154,14 @@ public class JumpBall : MonoBehaviour
 
             int index = SceneManager.GetActiveScene().buildIndex + 1;
             string name = UnityEngine.SceneManagement.SceneUtility.GetScenePathByBuildIndex( index );
-            Initiate.Fade(name, Color.black, 1);
+            if(string.IsNullOrEmpty(name))
+            {
+                Initiate.Fade("MainMenu", Color.black, 1);
+            }
+            else
+            {
+                Initiate.Fade(name, Color.black, 1);
+            }
         }
     }
 

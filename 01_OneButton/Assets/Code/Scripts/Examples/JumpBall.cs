@@ -34,7 +34,7 @@ public class JumpBall : MonoBehaviour
     private int _yLimit = 0;
     private bool _isDead = false;
     private bool _isComplete = false;
-    private bool _isHittingObstacle = false;
+    private int _isHittingObstacle = 0;
 
     void Awake()
     {
@@ -95,7 +95,8 @@ public class JumpBall : MonoBehaviour
 
     private void ConsumeInput()
     {
-        if(_isHittingObstacle && !_pauseMenu.isActiveAndEnabled)
+        Debug.Log("Consume Input " + _isHittingObstacle);
+        if(_isHittingObstacle != 0 && !_pauseMenu.isActiveAndEnabled)
         {
             _isDead = true;
             _pauseMenu.Pause(true);
@@ -136,12 +137,14 @@ public class JumpBall : MonoBehaviour
 
         if(other.CompareTag("Crab"))
         {
-            _isHittingObstacle = true;
+            _isHittingObstacle++;
+            Debug.Log("Crab Enter");    
         }
 
         if(other.CompareTag("Rock"))
         {
-            _isHittingObstacle = true;
+            _isHittingObstacle++;
+            Debug.Log("Rock Enter");
         }
 
         if(other.CompareTag("FinishLine"))
@@ -164,12 +167,16 @@ public class JumpBall : MonoBehaviour
 
         if(other.CompareTag("Crab"))
         {
-            _isHittingObstacle = false;
+            _isHittingObstacle--;
+
+            Debug.Log("Crab exit");
         }
 
         if(other.CompareTag("Rock"))
         {
-            _isHittingObstacle = false;
+            _isHittingObstacle--;
+
+            Debug.Log("Rock exit");
         }
     }
 }

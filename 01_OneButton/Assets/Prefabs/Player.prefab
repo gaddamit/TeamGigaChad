@@ -106,6 +106,8 @@ MonoBehaviour:
   jumpSpeedIncrease: 1
   _jumpDistance: 1.27
   _pauseMenu: {fileID: 0}
+  _startJumpDelay: 4
+  _startJumpCounter: 4
 --- !u!96 &7796045000217631694
 TrailRenderer:
   serializedVersion: 3

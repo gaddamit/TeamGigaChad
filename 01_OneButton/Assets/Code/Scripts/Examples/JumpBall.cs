@@ -36,21 +36,35 @@ public class JumpBall : MonoBehaviour
     private bool _isComplete = false;
     private int _isHittingObstacle = 0;
 
+    [SerializeField]
+    private float _startJumpDelay = 4;
+    [SerializeField]
+    private float _startJumpCounter = 4;
+
+    [SerializeField]
+    private AudioSource[] _backgroundMusic;
     void Awake()
     {
         _currentButton.CurrentState = ButtonState.Released;
         _rb = GetComponent<Rigidbody2D>();
+        
         var inputObject = FindObjectOfType<PlayerInputs>();
-        //inputObject.RegisterListener(this);
         _rb.velocity = new Vector2(0, -jumpForce);
+
+
+        // Setup Background Music
+        _backgroundMusic = new AudioSource[2];
+        _backgroundMusic[0] = GameObject.Find("Audios/BackgroundAudio").GetComponent<AudioSource>();
+        _backgroundMusic[1] = GameObject.Find("Audios/CompleteAudio").GetComponent<AudioSource>();
     }
 
-    private float _startJumpCounter = 5;
+    // Starting Position
     private void Start()
     {
-        InvokeRepeating("StartJump", 2, 1);
+        InvokeRepeating("StartJump", _startJumpDelay, 1);
     }
 
+    // Animate a few jumps
     private void StartJump()
     {
         _startJumpCounter--;
@@ -74,6 +88,7 @@ public class JumpBall : MonoBehaviour
         }
     }
 
+    // Make the character jump forward
     private void JumpForward()
     {
         Vector3 direction = Vector3.right;
@@ -93,13 +108,15 @@ public class JumpBall : MonoBehaviour
         transform.DOJump(transform.position + direction * _jumpDistance, 1, 1, 0.5f).onComplete += ConsumeInput;
     }
 
+    // Check for inputs to change the direction
+    // Also check if player is hitting any obstacle
     private void ConsumeInput()
     {
-        //Debug.Log("Consume Input " + _isHittingObstacle);
         if(_isHittingObstacle != 0 && !_pauseMenu.isActiveAndEnabled)
         {
             _isDead = true;
             _pauseMenu.Pause(true);
+            CancelInvoke("JumpForward");
             return;
         }
 
@@ -122,12 +139,13 @@ public class JumpBall : MonoBehaviour
         if(_yLimit < -3 || _yLimit > 4)
         {
             _state = State.Forwards;
-            Debug.Log("Game Over");
         }
 
         _buttonPressCounter = 0;
     }
 
+    // Check for collisions and update counter if player is hitting any obstacle
+    // The isHittingObstacle should be 0 before the next jump or else the player is standing on an obstacle
     private void OnTriggerEnter2D(Collider2D other)
     {
         if(_isDead || _isComplete)
@@ -138,13 +156,11 @@ public class JumpBall : MonoBehaviour
         if(other.CompareTag("Crab"))
         {
             _isHittingObstacle++;
-            Debug.Log("Crab Enter");    
         }
 
         if(other.CompareTag("Rock"))
         {
             _isHittingObstacle++;
-            Debug.Log("Rock Enter");
         }
 
         if(other.CompareTag("FinishLine"))
@@ -152,19 +168,13 @@ public class JumpBall : MonoBehaviour
             _inputEnabled = false;
             _isComplete = true;
 
-            int index = SceneManager.GetActiveScene().buildIndex + 1;
-            string name = UnityEngine.SceneManagement.SceneUtility.GetScenePathByBuildIndex( index );
-            if(string.IsNullOrEmpty(name))
-            {
-                Initiate.Fade("MainMenu", Color.black, 1);
-            }
-            else
-            {
-                Initiate.Fade(name, Color.black, 1);
-            }
+            // Start level complete sequence
+            Invoke("PlayLevelCompleteMusic", 1);
+            Invoke("LoadNextLevel", 4);
         }
     }
 
+    // Check for exit collisions
     private void OnTriggerExit2D(Collider2D other)
     {
         if(_isDead || _isComplete)
@@ -175,15 +185,40 @@ public class JumpBall : MonoBehaviour
         if(other.CompareTag("Crab"))
         {
             _isHittingObstacle--;
-
-            Debug.Log("Crab exit");
         }
 
         if(other.CompareTag("Rock"))
         {
             _isHittingObstacle--;
+        }
+    }
 
-            Debug.Log("Rock exit");
+    // Play level complete music and stop background music
+    private void PlayLevelCompleteMusic()
+    {
+        if(_backgroundMusic[0])
+        {
+            _backgroundMusic[0].Stop();
+        }
+
+        if(_backgroundMusic[1])
+        {
+            _backgroundMusic[1].Play();
+        }
+    }
+
+    // Move to the next level, if there is no next level, go to the main menu
+    private void LoadNextLevel()
+    {
+        int index = SceneManager.GetActiveScene().buildIndex + 1;
+        string name = UnityEngine.SceneManagement.SceneUtility.GetScenePathByBuildIndex( index );
+        if(string.IsNullOrEmpty(name))
+        {
+            Initiate.Fade("MainMenu", Color.black, 1);
+        }
+        else
+        {
+            Initiate.Fade(name, Color.black, 1);
         }
     }
 }

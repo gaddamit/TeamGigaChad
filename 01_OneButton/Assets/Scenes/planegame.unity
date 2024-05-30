@@ -149,8 +149,8 @@ Transform:
   m_GameObject: {fileID: 94613851}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.5427427, y: 0.9418683, z: -0.07336663}
-  m_LocalScale: {x: 4, y: 1, z: 1}
+  m_LocalPosition: {x: -1.53, y: 0.89, z: -0.07336663}
+  m_LocalScale: {x: 4.5077386, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2003927315}
@@ -296,11 +296,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2918108644139746365, guid: 0d47bb602e0f4f94da97175599520aa2, type: 3}
   m_PrefabInstance: {fileID: 7124110935540259692}
   m_PrefabAsset: {fileID: 0}
---- !u!50 &1618216755 stripped
-Rigidbody2D:
-  m_CorrespondingSourceObject: {fileID: 66671769392203523, guid: 0d47bb602e0f4f94da97175599520aa2, type: 3}
-  m_PrefabInstance: {fileID: 7124110935540259692}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1887159027
 GameObject:
   m_ObjectHideFlags: 0
@@ -342,6 +337,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2003927315}
   - component: {fileID: 2003927314}
+  - component: {fileID: 2003927316}
   m_Layer: 0
   m_Name: Plane
   m_TagString: Untagged
@@ -364,8 +360,8 @@ MonoBehaviour:
   FireLocation: {fileID: 1887159027}
   Gun: {fileID: 1142578958}
   projectile: {fileID: 1618216754}
-  projectileRB: {fileID: 1618216755}
-  thrust: 0
+  planeRB: {fileID: 2003927316}
+  thrust: 5
 --- !u!4 &2003927315
 Transform:
   m_ObjectHideFlags: 0
@@ -384,6 +380,33 @@ Transform:
   - {fileID: 1887159028}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!50 &2003927316
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2003927313}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &2116145655
 GameObject:
   m_ObjectHideFlags: 0

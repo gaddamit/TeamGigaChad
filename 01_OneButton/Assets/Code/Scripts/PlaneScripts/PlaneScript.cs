@@ -19,6 +19,7 @@ public class PlaneScript : MonoBehaviour
     public bool moveRight;
     public bool moveUp;
     public bool moveDown;
+    public int ammo;
 
     public Rigidbody2D planeRB;
    
@@ -45,7 +46,7 @@ public class PlaneScript : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Space))
         {
-            if (!isAttacking)
+            if (!isAttacking && ammo >=1)
             {
                 StartCoroutine(gunBurstDelay());
             }
@@ -137,6 +138,7 @@ public class PlaneScript : MonoBehaviour
         burst3RB.AddForce(transform.right * thrust * burstVariance, ForceMode2D.Impulse);
         burst3RB.AddForce(transform.up * -thrust * burstVariance , ForceMode2D.Impulse);
         isAttacking = false;
+        ammo--;
         yield return null;
     }
 }

@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class waterReloadZone : MonoBehaviour
 {
+    public GameObject planeGO;
     public PlaneScript plane;
     bool isReloading;
     // Start is called before the first frame update
     void Start()
     {
-        
+        PlaneScript plane = planeGO.GetComponent<PlaneScript>();
     }
 
     // Update is called once per frame

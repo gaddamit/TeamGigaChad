@@ -6,12 +6,18 @@ public class fire : MonoBehaviour
 {
     public float timealive;
     public bool bigfire;
+    bool Spread;
+    bool Spread2;
+
     int hits;
     public PlaneScript PlaneSC;
+    public GameObject Fire;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        Spread = true;
+        Spread2 = true;
         timealive = 0;
         var PlaneOB = GameObject.Find("Plane");
         var PlaneSC = PlaneOB.GetComponent<PlaneScript>();
@@ -21,8 +27,17 @@ public class fire : MonoBehaviour
     void FixedUpdate()
     {
         timealive = timealive + Time.deltaTime;
-
-       if (bigfire)
+       if (bigfire && timealive > 10&&Spread)
+        {
+            Instantiate(Fire, new Vector2(transform.position.x + 0.5f , transform.position.y), Quaternion.identity);
+            Spread = false;
+        }
+        if (bigfire && timealive > 15 && Spread2)
+        {
+            Instantiate(Fire, new Vector2(transform.position.x - 0.5f, transform.position.y), Quaternion.identity);
+            Spread2 = false;
+        }
+        if (bigfire)
         {
             this.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f) * ((timealive + 10) * 0.07f);
 
@@ -55,10 +70,12 @@ public class fire : MonoBehaviour
             else
             {
                 hits++;
-                if (hits > 5)
-                PlaneSC.score = PlaneSC.score + 10 - (int)timealive;
+                if (hits > 8)
+                {
+                    PlaneSC.score = PlaneSC.score + 10 - (int)timealive;
 
-                Destroy(gameObject);
+                    Destroy(gameObject);
+                }
             }
         }
     }

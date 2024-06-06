@@ -19,6 +19,7 @@ public class PlaneScript : MonoBehaviour
     public bool moveUp;
     public bool moveDown;
     public int ammo;
+    public int score;
     private bool isFacingRight;
     float horizontal;
 
@@ -37,7 +38,7 @@ public class PlaneScript : MonoBehaviour
     {
         planeRB = GetComponent<Rigidbody2D>();
         planeRB.gravityScale = 0;
-        planeRB.drag = 1;
+        planeRB.drag = 0.7f;
         
         
     }
@@ -122,7 +123,7 @@ public class PlaneScript : MonoBehaviour
         burstVariance = Random.Range(0.9F, 1.1F);
         burst1 = Instantiate(projectile, FireLocation.transform.position, FireLocation.transform.rotation);
         burst1RB = burst1.GetComponent<Rigidbody2D>();
-        burst1RB.AddForce(transform.right *burstVariance * (planeRB.velocity.x + 0.5f) *2, ForceMode2D.Impulse);
+        burst1RB.AddForce(transform.right *burstVariance * (planeRB.velocity.x ) *2, ForceMode2D.Impulse);
         burst1RB.AddForce(-transform.up   * burstVariance  , ForceMode2D.Impulse);
 
 
@@ -131,7 +132,7 @@ public class PlaneScript : MonoBehaviour
 
         burst2 = Instantiate(projectile, FireLocation.transform.position, FireLocation.transform.rotation);
         burst2RB = burst2.GetComponent<Rigidbody2D>();
-        burst2RB.AddForce(transform.right * burstVariance * (planeRB.velocity.x + 0.5f) * 2, ForceMode2D.Impulse);
+        burst2RB.AddForce(transform.right * burstVariance * (planeRB.velocity.x ) * 2, ForceMode2D.Impulse);
         burst2RB.AddForce(-transform.up  * burstVariance  , ForceMode2D.Impulse);
 
 
@@ -140,7 +141,7 @@ public class PlaneScript : MonoBehaviour
 
         burst3 = Instantiate(projectile, FireLocation.transform.position, FireLocation.transform.rotation);
         burst3RB = burst3.GetComponent<Rigidbody2D>();
-        burst3RB.AddForce(transform.right  * burstVariance * (planeRB.velocity.x + 0.5f) * 2, ForceMode2D.Impulse);
+        burst3RB.AddForce(transform.right  * burstVariance * (planeRB.velocity.x ) * 2, ForceMode2D.Impulse);
         burst3RB.AddForce(-transform.up * burstVariance , ForceMode2D.Impulse);
 
         yield return new WaitForSeconds(0.05f);
@@ -148,7 +149,7 @@ public class PlaneScript : MonoBehaviour
 
         burst3 = Instantiate(projectile, FireLocation.transform.position, FireLocation.transform.rotation);
         burst3RB = burst3.GetComponent<Rigidbody2D>();
-        burst3RB.AddForce(transform.right  * burstVariance *( planeRB.velocity.x + 0.5f) * 2 , ForceMode2D.Impulse);
+        burst3RB.AddForce(transform.right  * burstVariance *( planeRB.velocity.x) * 2 , ForceMode2D.Impulse);
         burst3RB.AddForce(-transform.up   * burstVariance , ForceMode2D.Impulse);
         isAttacking = false;
         ammo--;

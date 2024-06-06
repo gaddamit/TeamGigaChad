@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    public float timeLeft = 2f;
+    public float timeLeft = 1f;
     
 
     // Update is called once per frame

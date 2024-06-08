@@ -105,7 +105,7 @@ public class FireSpreader : MonoBehaviour
     {
         if(other.tag == "Projectile")
         {
-            // Find which tile the projectile is on
+            // Find which tile the projectile hits
             Vector3Int cell = _tilemap.WorldToCell(other.transform.position);
 
             TileBase tileBase = _tilemap.GetTile(cell);
@@ -115,12 +115,15 @@ public class FireSpreader : MonoBehaviour
             }
             else if(tileBase.name == "FireAnimation")
             {
+                // Add splash effect
                 ParticleSystem particle = Instantiate(_waterSplash, other.transform.position, Quaternion.identity);
                 Destroy(particle.gameObject, 1.0f);
 
                 _tilemap.SetTile(cell, null);
                 _fireCount--;
         
+                // If all fires are extinguished, stop spreading fire
+                // and invoke the level complete event
                 if( _fireCount == 0 )
                 {
                     CancelInvoke("SpreadFire");

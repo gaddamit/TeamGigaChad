@@ -34,15 +34,14 @@ public class PlaneScript : MonoBehaviour
     [SerializeField] private int thrust;
 
     private bool isWaterEntered = false;
-    [SerializeField]
-    private float delayWaterRefill = 2.0f;
+    [SerializeField] private float delayWaterRefill = 2.0f;
     [SerializeField] private GameObject waterMeter;
 
     private bool allowInput = false;
     [SerializeField] private float inputDelay = 2;
 
-    [SerializeField]
-    private AudioSource[] _sfx;
+    [SerializeField] private AudioSource[] _sfx;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -50,6 +49,7 @@ public class PlaneScript : MonoBehaviour
         planeRB.gravityScale = 0;
         planeRB.drag = 0.7f;
         
+        // Animate plane to move right and delay user input
         planeRB.AddForce(this.transform.right * 50 * 3);
         Invoke("EnableInput", inputDelay);
     }
@@ -70,6 +70,7 @@ public class PlaneScript : MonoBehaviour
         else if (isFacingRight && horizontal > 0f) Flip();
     }
 
+    // Keyboard input handling
     private void HandleInput()
     {
         if(!allowInput)
@@ -118,6 +119,7 @@ public class PlaneScript : MonoBehaviour
         }
     }
 
+    // Flip the plane when changing direction
     private void Flip()
     {
         isFacingRight = !isFacingRight;
@@ -144,6 +146,8 @@ public class PlaneScript : MonoBehaviour
             planeRB.AddForce(this.transform.up * thrust * 3);
         }
     }
+
+    // Fire burst of 3 bullets
     IEnumerator gunBurstDelay()
     {
         isAttacking = true;
@@ -191,6 +195,7 @@ public class PlaneScript : MonoBehaviour
         waterMeter.transform.localScale = new Vector3(1, ammo / (float)maxAmmo, 1);
     }
 
+    // Refill water when plane stays in water tiles
     private void OnTriggerStay2D(Collider2D other)
     {
         if (other.tag == "Water" && isWaterEntered && ammo < maxAmmo)
@@ -204,6 +209,8 @@ public class PlaneScript : MonoBehaviour
             }
         }      
     }
+
+    // Only trigger refill when plane enters water tiles after a delay
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Water")
@@ -211,15 +218,8 @@ public class PlaneScript : MonoBehaviour
             Invoke("SetWaterEntered", delayWaterRefill);
         }
     }
-    private void SetWaterEntered()
-    {
-        isWaterEntered = true;
-        if( ammo < maxAmmo)
-        {
-            _sfx[0].Play();
-        }
-    }
 
+    // Stop refill when plane exits water tiles
     private void OnTriggerExit2D(Collider2D other)
     {
         if (other.tag == "Water")
@@ -229,4 +229,15 @@ public class PlaneScript : MonoBehaviour
             _sfx[0].Stop();
         }
     }
+
+    // Set water entered flag and play refill sound
+    private void SetWaterEntered()
+    {
+        isWaterEntered = true;
+        if( ammo < maxAmmo)
+        {
+            _sfx[0].Play();
+        }
+    }
+
 }

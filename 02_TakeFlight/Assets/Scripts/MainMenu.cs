@@ -7,7 +7,7 @@ public class MainMenu : MonoBehaviour
 {
     public void PlayGame()
     {
-        Initiate.Fade("Scenes/Level1", Color.black, 1);
+        Initiate.Fade("Scenes/Tutorial", Color.black, 1);
     }
 
     public void QuitGame()

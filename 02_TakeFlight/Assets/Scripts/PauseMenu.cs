@@ -19,9 +19,7 @@ public class PauseMenu : MonoBehaviour
     void Awake()
     {
         // Setup Background Music
-        _backgroundMusic = new AudioSource[2];
-        _backgroundMusic[0] = GameObject.Find("Audios/BackgroundAudio").GetComponent<AudioSource>();
-        _backgroundMusic[1] = GameObject.Find("Audios/CompleteAudio").GetComponent<AudioSource>();
+        _backgroundMusic = GameObject.Find("Audios/BackgroundAudio").GetComponents<AudioSource>();
     }
 
     public void Pause()

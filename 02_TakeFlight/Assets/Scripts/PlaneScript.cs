@@ -40,6 +40,9 @@ public class PlaneScript : MonoBehaviour
 
     private bool allowInput = false;
     [SerializeField] private float inputDelay = 2;
+
+    [SerializeField]
+    private AudioSource[] _sfx;
     // Start is called before the first frame update
     void Start()
     {
@@ -190,11 +193,16 @@ public class PlaneScript : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D other)
     {
-        if (other.tag == "Water" && isWaterEntered)
+        if (other.tag == "Water" && isWaterEntered && ammo < maxAmmo)
         {
             ammo = Mathf.Clamp(ammo + 1, 0, maxAmmo);
             UpdateWaterMeter();
-        }        
+
+            if(ammo == maxAmmo)
+            {
+                _sfx[0].Stop();
+            }
+        }      
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -206,6 +214,10 @@ public class PlaneScript : MonoBehaviour
     private void SetWaterEntered()
     {
         isWaterEntered = true;
+        if( ammo < maxAmmo)
+        {
+            _sfx[0].Play();
+        }
     }
 
     private void OnTriggerExit2D(Collider2D other)
@@ -214,6 +226,7 @@ public class PlaneScript : MonoBehaviour
         {
             CancelInvoke("SetWaterEntered");
             isWaterEntered = false;
+            _sfx[0].Stop();
         }
     }
 }

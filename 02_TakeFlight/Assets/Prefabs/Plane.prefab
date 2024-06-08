@@ -511,7 +511,7 @@ MonoBehaviour:
   FireLocation: {fileID: 6476390767958052964}
   projectile: {fileID: 6372215907630366643, guid: eb43df258efb4934b9dc01e374b793ed,
     type: 3}
-  maxSpeed: 1.8
+  maxSpeed: 3
   isAttacking: 0
   moveLeft: 0
   moveRight: 0
@@ -522,7 +522,11 @@ MonoBehaviour:
   score: 0
   planeRB: {fileID: 0}
   thrust: 2
+  delayWaterRefill: 2
   waterMeter: {fileID: 6931216135240841514}
+  inputDelay: 2
+  _sfx:
+  - {fileID: 0}
 --- !u!50 &7170449848424986163
 Rigidbody2D:
   serializedVersion: 4

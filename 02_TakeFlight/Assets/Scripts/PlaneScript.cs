@@ -19,6 +19,7 @@ public class PlaneScript : MonoBehaviour
     public bool moveUp;
     public bool moveDown;
     public int ammo;
+    public int maxAmmo;
     public int score;
     private bool isFacingRight;
     float horizontal;
@@ -32,7 +33,13 @@ public class PlaneScript : MonoBehaviour
 
     [SerializeField] private int thrust;
 
+    private bool isWaterEntered = false;
+    [SerializeField]
+    private float delayWaterRefill = 2.0f;
+    [SerializeField] private GameObject waterMeter;
 
+    private bool allowInput = false;
+    [SerializeField] private float inputDelay = 2;
     // Start is called before the first frame update
     void Start()
     {
@@ -40,12 +47,33 @@ public class PlaneScript : MonoBehaviour
         planeRB.gravityScale = 0;
         planeRB.drag = 0.7f;
         
-        
+        planeRB.AddForce(this.transform.right * 50 * 3);
+        Invoke("EnableInput", inputDelay);
+    }
+
+    private void EnableInput()
+    {
+        allowInput = true;
     }
 
     // Update is called once per frame
     void Update()
     {
+        HandleInput();
+
+        horizontal = planeRB.velocity.x;
+        if (!isFacingRight && horizontal < 0f)
+            Flip();
+        else if (isFacingRight && horizontal > 0f) Flip();
+    }
+
+    private void HandleInput()
+    {
+        if(!allowInput)
+        {
+            return;
+        }
+
         if (Input.GetKey(KeyCode.Space))
         {
             if (!isAttacking && ammo >=1)
@@ -85,10 +113,6 @@ public class PlaneScript : MonoBehaviour
         {
             moveUp = false;
         }
-        horizontal = planeRB.velocity.x;
-        if (!isFacingRight && horizontal < 0f)
-            Flip();
-        else if (isFacingRight && horizontal > 0f) Flip();
     }
 
     private void Flip()
@@ -153,6 +177,43 @@ public class PlaneScript : MonoBehaviour
         burst3RB.AddForce(-transform.up   * burstVariance , ForceMode2D.Impulse);
         isAttacking = false;
         ammo--;
+
+        UpdateWaterMeter();
         yield return null;
+    }
+
+    private void UpdateWaterMeter()
+    {
+        SpriteRenderer waterSprite = waterMeter.GetComponent<SpriteRenderer>();
+        waterMeter.transform.localScale = new Vector3(1, ammo / (float)maxAmmo, 1);
+    }
+
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        if (other.tag == "Water" && isWaterEntered)
+        {
+            ammo = Mathf.Clamp(ammo + 1, 0, maxAmmo);
+            UpdateWaterMeter();
+        }        
+    }
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.tag == "Water")
+        {
+            Invoke("SetWaterEntered", delayWaterRefill);
+        }
+    }
+    private void SetWaterEntered()
+    {
+        isWaterEntered = true;
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.tag == "Water")
+        {
+            CancelInvoke("SetWaterEntered");
+            isWaterEntered = false;
+        }
     }
 }

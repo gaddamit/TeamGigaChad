@@ -105,13 +105,12 @@ public class FireSpreader : MonoBehaviour
     {
         if(other.tag == "Projectile")
         {
-            // find which tile the projectile is on
+            // Find which tile the projectile is on
             Vector3Int cell = _tilemap.WorldToCell(other.transform.position);
 
             TileBase tileBase = _tilemap.GetTile(cell);
             if(tileBase == null)
             {
-                Debug.Log("No tile found");
                 return;
             }
             else if(tileBase.name == "FireAnimation")
@@ -119,8 +118,6 @@ public class FireSpreader : MonoBehaviour
                 ParticleSystem particle = Instantiate(_waterSplash, other.transform.position, Quaternion.identity);
                 Destroy(particle.gameObject, 1.0f);
 
-
-                Debug.Log("Fire found");
                 _tilemap.SetTile(cell, null);
                 _fireCount--;
         
@@ -132,5 +129,4 @@ public class FireSpreader : MonoBehaviour
             }
         }
     }
-
 }

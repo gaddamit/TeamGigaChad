@@ -12,11 +12,11 @@ public class Timer : MonoBehaviour
     private bool isTimerOver = false;
     void Update()
     {
+        remainingTime -= Time.deltaTime;
+
         if(remainingTime > 0)
         {
-            remainingTime -= Time.deltaTime;
             UpdateTimer(remainingTime);
-            
         }
         else
         {

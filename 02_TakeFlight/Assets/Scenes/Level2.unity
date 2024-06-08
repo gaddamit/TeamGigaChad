@@ -22164,6 +22164,7 @@ GameObject:
   - component: {fileID: 545206577}
   - component: {fileID: 545206579}
   - component: {fileID: 545206578}
+  - component: {fileID: 545206580}
   m_Layer: 0
   m_Name: Fire
   m_TagString: Untagged
@@ -22350,7 +22351,7 @@ Tilemap:
       - {fileID: 21300000, guid: c6eadfa8bfb1c4f76b0b9dfb33535f38, type: 3}
       - {fileID: 21300000, guid: 7b79393cf2be14a6184a7d6998defd1c, type: 3}
       - {fileID: 21300000, guid: b0b0b069972a0494d83f74fff4d3b9a1, type: 3}
-      m_AnimationSpeed: 32.469246
+      m_AnimationSpeed: 33.534225
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: -2, y: -6, z: 0}
@@ -22418,7 +22419,7 @@ Tilemap:
       - {fileID: 21300000, guid: c6eadfa8bfb1c4f76b0b9dfb33535f38, type: 3}
       - {fileID: 21300000, guid: 7b79393cf2be14a6184a7d6998defd1c, type: 3}
       - {fileID: 21300000, guid: b0b0b069972a0494d83f74fff4d3b9a1, type: 3}
-      m_AnimationSpeed: 33.886665
+      m_AnimationSpeed: 30.04076
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: -6, y: 1, z: 0}
@@ -22486,7 +22487,7 @@ Tilemap:
       - {fileID: 21300000, guid: c6eadfa8bfb1c4f76b0b9dfb33535f38, type: 3}
       - {fileID: 21300000, guid: 7b79393cf2be14a6184a7d6998defd1c, type: 3}
       - {fileID: 21300000, guid: b0b0b069972a0494d83f74fff4d3b9a1, type: 3}
-      m_AnimationSpeed: 31.97588
+      m_AnimationSpeed: 30.301575
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 5, y: 1, z: 0}
@@ -22554,7 +22555,7 @@ Tilemap:
       - {fileID: 21300000, guid: c6eadfa8bfb1c4f76b0b9dfb33535f38, type: 3}
       - {fileID: 21300000, guid: 7b79393cf2be14a6184a7d6998defd1c, type: 3}
       - {fileID: 21300000, guid: b0b0b069972a0494d83f74fff4d3b9a1, type: 3}
-      m_AnimationSpeed: 30.461617
+      m_AnimationSpeed: 30.391088
       m_AnimationTimeOffset: 0
       m_Flags: 0
   m_TileAssetArray:
@@ -22609,6 +22610,22 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!114 &545206580
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 545206576}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04bb63725eda94eb0a2c2d1384b2cab8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _tilemap: {fileID: 0}
+  _burntTile: {fileID: 0}
+  _forest: {fileID: 0}
+  _spreadRate: 5
 --- !u!1 &545741420
 GameObject:
   m_ObjectHideFlags: 0

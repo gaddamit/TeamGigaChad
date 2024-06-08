@@ -30,6 +30,11 @@ public class GameManager : MonoBehaviour
 
     public void OnGameOver()
     {
+        if(iSGameOver)
+        {
+            return;
+        }
+
         timer.OnTimerOver -= OnGameOver;
         iSGameOver = true;
         Time.timeScale = 0;
@@ -39,6 +44,11 @@ public class GameManager : MonoBehaviour
 
     public void OnGameComplete()
     {
+        if(iSGameOver)
+        {
+            return;
+        }
+
         fireSpreader.OnFireSpreadStopped -= OnGameComplete;
         iSGameOver = true;
         Invoke("ShowWinScreen", 2.0f);

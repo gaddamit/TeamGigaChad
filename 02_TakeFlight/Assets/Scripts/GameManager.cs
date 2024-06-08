@@ -1,13 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class GameManager : MonoBehaviour
 {
     private bool isPaused = false;
     private bool iSGameOver = false;
     [SerializeField] GameObject pauseMenu;
-    Timer timer;
+    private Timer timer;
+    
+    private FireSpreader fireSpreader;
 
     // Start is called before the first frame update
     void Start()
@@ -16,6 +17,9 @@ public class GameManager : MonoBehaviour
 
         timer = GetComponent<Timer>();
         timer.OnTimerOver += OnGameOver;
+
+        fireSpreader = FindObjectOfType<FireSpreader>();
+        fireSpreader.OnFireSpreadStopped += OnGameComplete;
     }
 
     // Update is called once per frame
@@ -31,5 +35,19 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0;
         pauseMenu.SetActive(true);
         pauseMenu.GetComponent<PauseMenu>().SetIsLevelComplete(false);
+    }
+
+    public void OnGameComplete()
+    {
+        fireSpreader.OnFireSpreadStopped -= OnGameComplete;
+        iSGameOver = true;
+        Invoke("ShowWinScreen", 2.0f);
+    }
+
+    public void ShowWinScreen()
+    {
+        Time.timeScale = 0;
+        pauseMenu.SetActive(true);
+        pauseMenu.GetComponent<PauseMenu>().SetIsLevelComplete(true);
     }
 }

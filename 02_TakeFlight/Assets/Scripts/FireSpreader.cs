@@ -5,15 +5,47 @@ using UnityEngine.Tilemaps;
 
 public class FireSpreader : MonoBehaviour
 {
-
-    [SerializeField] private Tilemap _tilemap;
+    private int _fireCount = 0;
     [SerializeField] private AnimatedTile _burntTile;
     [SerializeField] private Tilemap _forest;
+    [SerializeField] private Tilemap _tilemap;
     [SerializeField] private float _spreadRate = 5.0f;
+    [SerializeField] private ParticleSystem _waterSplash;
+
+    public delegate void FireSpreadStopped();
+    public event FireSpreadStopped OnFireSpreadStopped;
+
     // Start is called before the first frame update
     void Start()
     {
-        InvokeRepeating("SpreadFire", 5.0f, _spreadRate);
+        CountFireTiles();
+        InvokeRepeating("SpreadFire", _spreadRate, _spreadRate);
+    }
+
+    void CountFireTiles()
+    {
+        BoundsInt bounds = _tilemap.cellBounds;
+        TileBase[] allTiles = _tilemap.GetTilesBlock(bounds);
+
+        for (int x = 0; x < bounds.size.x; x++)
+        {
+            for (int y = 0; y < bounds.size.y; y++)
+            {
+                Vector3Int localPlace = (new Vector3Int(bounds.x + x, bounds.y + y, bounds.z));
+                Vector3 place = _tilemap.CellToWorld(localPlace);
+                TileBase tile = allTiles[x + y * bounds.size.x];
+
+                if (tile != null)
+                {
+                    if (tile.name == "FireAnimation")
+                    {
+                        _fireCount++;
+                    }
+                }
+            }
+        }
+
+        Debug.Log("Fire Count: " + _fireCount);
     }
 
     void SpreadFire()
@@ -48,9 +80,10 @@ public class FireSpreader : MonoBehaviour
                             TileBase tileAtPosition = _forest.GetTile(position);
                             if (tileAtPosition != null)
                             {
-                                if (tileAtPosition.name.Contains("tree"));
+                                if (tileAtPosition.name.Contains("tree") && _tilemap.GetTile(position) == null)
                                 {
                                     _tilemap.SetTile(position, _burntTile);
+                                    _fireCount++;
                                 }
                             }
                         }
@@ -58,6 +91,8 @@ public class FireSpreader : MonoBehaviour
                 }
             }
         }
+
+        Debug.Log("Fire Count: " + _fireCount);
     }
 
     // Update is called once per frame
@@ -68,6 +103,34 @@ public class FireSpreader : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("Fire has spread to " + other.name);
+        if(other.tag == "Projectile")
+        {
+            // find which tile the projectile is on
+            Vector3Int cell = _tilemap.WorldToCell(other.transform.position);
+
+            TileBase tileBase = _tilemap.GetTile(cell);
+            if(tileBase == null)
+            {
+                Debug.Log("No tile found");
+                return;
+            }
+            else if(tileBase.name == "FireAnimation")
+            {
+                ParticleSystem particle = Instantiate(_waterSplash, other.transform.position, Quaternion.identity);
+                Destroy(particle.gameObject, 1.0f);
+
+
+                Debug.Log("Fire found");
+                _tilemap.SetTile(cell, null);
+                _fireCount--;
+        
+                if( _fireCount == 0 )
+                {
+                    CancelInvoke("SpreadFire");
+                    OnFireSpreadStopped?.Invoke();
+                }
+            }
+        }
     }
+
 }

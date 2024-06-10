@@ -20,6 +20,7 @@ public class PlaneScript : MonoBehaviour
     public bool moveDown;
     public int ammo;
     public int maxAmmo;
+    public int reloadAmount = 2;
     public int score;
     private bool isFacingRight;
     float horizontal;
@@ -195,49 +196,26 @@ public class PlaneScript : MonoBehaviour
         waterMeter.transform.localScale = new Vector3(1, ammo / (float)maxAmmo, 1);
     }
 
-    // Refill water when plane stays in water tiles
-    private void OnTriggerStay2D(Collider2D other)
+    public void ReloadAmmo()
     {
-        if (other.tag == "Water" && isWaterEntered && ammo < maxAmmo)
-        {
-            ammo = Mathf.Clamp(ammo + 1, 0, maxAmmo);
-            UpdateWaterMeter();
+        ammo = Mathf.Clamp(ammo + reloadAmount, 0, maxAmmo);
+        UpdateWaterMeter();
 
-            if(ammo == maxAmmo)
+        if(ammo < maxAmmo)
+        {
+            if(!_sfx[0].isPlaying)
             {
-                _sfx[0].Stop();
+                _sfx[0].Play();
             }
-        }      
-    }
-
-    // Only trigger refill when plane enters water tiles after a delay
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.tag == "Water")
-        {
-            Invoke("SetWaterEntered", delayWaterRefill);
         }
-    }
-
-    // Stop refill when plane exits water tiles
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.tag == "Water")
+        else
         {
-            CancelInvoke("SetWaterEntered");
-            isWaterEntered = false;
             _sfx[0].Stop();
         }
     }
 
-    // Set water entered flag and play refill sound
-    private void SetWaterEntered()
+    public void StopReloadAmmo()
     {
-        isWaterEntered = true;
-        if( ammo < maxAmmo)
-        {
-            _sfx[0].Play();
-        }
+        _sfx[0].Stop();
     }
-
 }

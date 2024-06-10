@@ -22,6 +22,7 @@ public class FireSpreader : MonoBehaviour
         InvokeRepeating("SpreadFire", _spreadRate, _spreadRate);
     }
 
+    // Counts the number of fire tiles on the tilemap
     void CountFireTiles()
     {
         BoundsInt bounds = _tilemap.cellBounds;
@@ -48,6 +49,7 @@ public class FireSpreader : MonoBehaviour
         Debug.Log("Fire Count: " + _fireCount);
     }
 
+    // Checks if a fire tile is adjacent to a tree tile, then adds a fire tile on top of the tree tile
     void SpreadFire()
     {
         BoundsInt bounds = _tilemap.cellBounds;

@@ -11,6 +11,8 @@ public class Timer : MonoBehaviour
     [SerializeField] float remainingTime;
     void Update()
     {
+        // If timer is enabled, update remaining time
+        // Timer in tutorial is disabled
         if(timerText.IsActive())
         {
             remainingTime -= Time.deltaTime;

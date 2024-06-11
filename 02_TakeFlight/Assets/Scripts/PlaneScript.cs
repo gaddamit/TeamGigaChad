@@ -41,7 +41,8 @@ public class PlaneScript : MonoBehaviour
     private bool allowInput = false;
     [SerializeField] private float inputDelay = 2;
 
-    [SerializeField] private AudioSource[] _sfx;
+    [SerializeField] private GameObject sfxObject;
+    [SerializeField] private AudioSource[] sfx;
 
     // Start is called before the first frame update
     void Start()
@@ -53,6 +54,8 @@ public class PlaneScript : MonoBehaviour
         // Animate plane to move right and delay user input
         planeRB.AddForce(this.transform.right * 50 * 3);
         Invoke("EnableInput", inputDelay);
+
+        sfx = sfxObject.GetComponents<AudioSource>();
     }
 
     private void EnableInput()
@@ -186,6 +189,8 @@ public class PlaneScript : MonoBehaviour
         isAttacking = false;
         ammo--;
 
+        sfx[1].Play();
+
         UpdateWaterMeter();
         yield return null;
     }
@@ -203,19 +208,19 @@ public class PlaneScript : MonoBehaviour
 
         if(ammo < maxAmmo)
         {
-            if(!_sfx[0].isPlaying)
+            if(!sfx[0].isPlaying)
             {
-                _sfx[0].Play();
+                sfx[0].Play();
             }
         }
         else
         {
-            _sfx[0].Stop();
+            sfx[0].Stop();
         }
     }
 
     public void StopReloadAmmo()
     {
-        _sfx[0].Stop();
+        sfx[0].Stop();
     }
 }

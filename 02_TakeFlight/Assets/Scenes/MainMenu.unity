@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 519054425}
   - component: {fileID: 519054424}
   m_Layer: 5
-  m_Name: Text
+  m_Name: TitleShadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -403,7 +403,7 @@ GameObject:
   - component: {fileID: 605544760}
   - component: {fileID: 605544759}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Subtitle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -970,7 +970,7 @@ GameObject:
   - component: {fileID: 1179707489}
   - component: {fileID: 1179707488}
   m_Layer: 5
-  m_Name: Text (1)
+  m_Name: Title
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1144,6 +1144,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7c9b6fa74906af4bbd7392c189ed235, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playButton: {fileID: 1995003314}
+  quitButton: {fileID: 541174463}
 --- !u!1 &1216028850
 GameObject:
   m_ObjectHideFlags: 0
@@ -1156,7 +1158,7 @@ GameObject:
   - component: {fileID: 1216028853}
   - component: {fileID: 1216028852}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

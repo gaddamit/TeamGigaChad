@@ -8,14 +8,14 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private GameObject playButton;
     [SerializeField] private GameObject quitButton;
 
-    
+
     private void Awake()
     {
-        #if UNITY_WEBGL
+#if UNITY_WEBGL
             // adjust rect transform of play button
             playButton.transform.localPosition = new Vector3(0, -250, 0);
             quitButton.SetActive(false);
-        #endif
+#endif
     }
 
     public void PlayGame()
@@ -25,10 +25,10 @@ public class MainMenu : MonoBehaviour
 
     public void QuitGame()
     {
-        #if UNITY_EDITOR
-            UnityEditor.EditorApplication.isPlaying = false;
-        #else
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
             UnityEngine.Application.Quit();
-        #endif
+#endif
     }
 }

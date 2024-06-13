@@ -1,6 +1,7 @@
 using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace GBTemplate
 {
@@ -38,25 +39,10 @@ namespace GBTemplate
         // Update is called once per frame
         void Update()
         {
-            UpdateInputTest();
-
-            if (gb.Input.ButtonSelectJustPressed)
-            {
-                gb.Display.PaletteCycleNext();
-            }
-
-            if (gb.Input.ButtonAJustPressed)
-            {
-                gb.Sound.PlaySound(exampleSoundA);
-            }
-
-            if (gb.Input.ButtonBJustPressed)
-            {
-                gb.Sound.PlaySound(exampleSoundB);
-            }
-
             if (gb.Input.ButtonStartJustPressed && !gb.Display.Fading)
             {
+                Debug.Log("Start button pressed");
+                gb.Sound.PlaySound(exampleSoundA);
                 StartCoroutine(FadeTest());
                 whiteFade = !whiteFade;
             }
@@ -80,12 +66,14 @@ namespace GBTemplate
             {
                 yield return gb.Display.StartCoroutine(gb.Display.FadeToWhite(2));
                 //Insert you action / scene transition here
+                SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex + 1);
                 yield return gb.Display.StartCoroutine(gb.Display.FadeFromWhite(2));                
             }
             else
             {
                 yield return gb.Display.StartCoroutine(gb.Display.FadeToBlack(2));
                 //Insert you action / scene transition here
+                SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex + 1);
                 yield return gb.Display.StartCoroutine(gb.Display.FadeFromBlack(2));
             }
         }

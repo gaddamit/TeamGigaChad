@@ -14,9 +14,9 @@ public class BananaShoot : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Fire1"))
-        {
-            Instantiate(BananaPrefab, transform.position, Quaternion.identity);
-        }
+        // if (Input.GetButtonDown("Fire1"))
+        // {
+        //     Instantiate(BananaPrefab, transform.position, Quaternion.identity);
+        // }
     }
 }

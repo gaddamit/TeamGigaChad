@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1933443543400807399}
   - component: {fileID: 7217043229920171743}
   m_Layer: 0
-  m_Name: TP_Environment2
+  m_Name: TM_Environment
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

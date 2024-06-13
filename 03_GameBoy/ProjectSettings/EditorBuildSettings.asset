@@ -6,15 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/GBTemplate/Example/Scenes/GBTemplate.unity
-    guid: 4881007ad4307524d826052ad89d1bd0
-  - enabled: 1
-    path: Assets/UI/MainMenu.unity
-    guid: 9fb139c2d039e0442b97422ae6cb5ab4
-  - enabled: 1
-    path: Assets/Scenes/LevelOne.unity
-    guid: fcfd7166cd2d41645974b36536ef2b17
-  - enabled: 1
     path: Assets/Scenes/MainMenu.unity
     guid: 971ef186dec5040a9809f5f7cc792c5c
+  - enabled: 1
+    path: Assets/Scenes/Level1.unity
+    guid: 7e66f52dad06348bda392d608cd486fa
+  - enabled: 1
+    path: Assets/Scenes/Level2.unity
+    guid: fcfd7166cd2d41645974b36536ef2b17
   m_configObjects: {}

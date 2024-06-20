@@ -3,17 +3,18 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    [SerializeField] private GameObject enemyPrefab;
-    [SerializeField] private GameObject enemyParent;
-    [SerializeField] private float spawnStartDelay = 3;
-    [SerializeField] private float spawnRate = 5;
+    [SerializeField] private GameObject _enemyPrefab;
+    [SerializeField] private float _spawnStartDelay = 3;
+    [SerializeField] private float _spawnRate = 5;
+    [SerializeField] private GameObject _spawnArea;
 
-    private Bounds bounds;
+    private Bounds _bounds;
+
     // Start is called before the first frame update
     void Start()
     {
-        bounds = this.GetComponent<SpriteRenderer>().bounds;
-        if(enemyPrefab != null)
+        _bounds = _spawnArea.GetComponent<SpriteRenderer>().bounds;
+        if(_enemyPrefab != null)
         {
             StartCoroutine(SpawnEnemy());
         }        
@@ -26,12 +27,12 @@ public class EnemySpawner : MonoBehaviour
 
     IEnumerator SpawnEnemy()
     {
-        yield return new WaitForSeconds(spawnStartDelay);
+        yield return new WaitForSeconds(_spawnStartDelay);
         while(true)
         {
-            Vector2 spawnPosition = new Vector2(Random.Range(bounds.min.x, bounds.max.x), Random.Range(bounds.min.y, bounds.max.y));
-            Instantiate(enemyPrefab, spawnPosition, Quaternion.identity, enemyParent.transform);
-            yield return new WaitForSeconds(spawnRate);
+            Vector2 spawnPosition = new Vector2(Random.Range(_bounds.min.x, _bounds.max.x), Random.Range(_bounds.min.y, _bounds.max.y));
+            Instantiate(_enemyPrefab, spawnPosition, Quaternion.identity, transform);
+            yield return new WaitForSeconds(_spawnRate);
         }
     }        
 }

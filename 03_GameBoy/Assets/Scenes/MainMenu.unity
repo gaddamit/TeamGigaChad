@@ -10976,7 +10976,7 @@ MonoBehaviour:
   sprB: {fileID: 1592335397}
   inputColorInactive: {r: 0.6509804, g: 0.6509804, b: 0.6509804, a: 1}
   inputColorActive: {r: 0.9960785, g: 0.9960785, b: 0.9960785, a: 1}
-  exampleMusic: {fileID: 8300000, guid: 9972f5a372fc5e4439a4410ea3fe8d8e, type: 3}
+  exampleMusic: {fileID: 0}
   exampleSoundA: {fileID: 8300000, guid: 80ec65df4c8d959499ffd6531d080d6b, type: 3}
   exampleSoundB: {fileID: 8300000, guid: fcba56989e81db1458f749047b0575a0, type: 3}
 --- !u!4 &1775056539
@@ -11045,7 +11045,7 @@ MonoBehaviour:
   playButton: {fileID: 1519282397}
   quitButton: {fileID: 0}
   audioClips:
-  - {fileID: 8300000, guid: 9972f5a372fc5e4439a4410ea3fe8d8e, type: 3}
+  - {fileID: 8300000, guid: 74a877232a18c4b1789ed2948e5fdfcb, type: 3}
   - {fileID: 8300000, guid: 80ec65df4c8d959499ffd6531d080d6b, type: 3}
 --- !u!1 &1864787903
 GameObject:
@@ -16377,6 +16377,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &2140111252 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 7654782120906185995, guid: 4d17c0d1ba771c546a8ac46210062831, type: 3}
+  m_PrefabInstance: {fileID: 7654782120959076455}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2141892774
 GameObject:
   m_ObjectHideFlags: 0
@@ -16530,6 +16535,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7654782120906185995, guid: 4d17c0d1ba771c546a8ac46210062831, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 74a877232a18c4b1789ed2948e5fdfcb, type: 3}
     - target: {fileID: 7654782121181837256, guid: 4d17c0d1ba771c546a8ac46210062831, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -16586,6 +16595,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7654782121563218827, guid: 4d17c0d1ba771c546a8ac46210062831, type: 3}
+      propertyPath: musicSource
+      value: 
+      objectReference: {fileID: 2140111252}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

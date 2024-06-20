@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BananaProjectile : MonoBehaviour
 {
-
+    public bool isGrounded = false;
     public float moveSpeed; 
     // Start is called before the first frame update
     void Start()
@@ -15,15 +15,13 @@ public class BananaProjectile : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(Vector2.up * moveSpeed * Time.deltaTime);
+        transform.Rotate(Vector3.forward * 360 * Time.deltaTime);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Enemy")
         {
-            Destroy(collision.gameObject);
-            Destroy(gameObject);
         }
     }
 }

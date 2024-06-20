@@ -60,6 +60,9 @@ public class PlayerController : Character
     public void APressed()
     {
         Debug.Log("A Pressed");
+        
+        BananaShoot bananaShoot = GetComponent<BananaShoot>();
+        bananaShoot.ShootProjectile();
     }
 
     public void BPressed()

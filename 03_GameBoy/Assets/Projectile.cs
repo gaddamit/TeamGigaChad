@@ -6,7 +6,7 @@ using DG.Tweening;
 
 public class Projectile : MonoBehaviour
 {
-    [SerializeField] private float _damage = 1;
+    [SerializeField] private int _damage = 1;
     [SerializeField] private float _speed = 2;
     // Start is called before the first frame update
     void Start()
@@ -23,5 +23,14 @@ public class Projectile : MonoBehaviour
     void StartDestroy()
     {
         Destroy(this.gameObject);
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if(other.CompareTag("Player"))
+        {
+            other.GetComponent<PlayerController>().TakeDamage(_damage);
+            Destroy(this.gameObject);
+        }
     }
 }

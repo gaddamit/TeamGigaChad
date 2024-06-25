@@ -7,6 +7,7 @@ public class Enemy : Character
     private Tween _walkTween;
     [SerializeField] private Projectile _projectilePrefab;
 
+    private PlayerController _playerController;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,6 +17,8 @@ public class Enemy : Character
         {
             StartWalking();
         }
+
+        _playerController = FindObjectOfType<PlayerController>();
     }
 
     private void StartWalking()
@@ -34,13 +37,7 @@ public class Enemy : Character
 
     private void StartDestroy()
     {
-        PlayerLives.lives--;
-        if(PlayerLives.lives <= 0)
-        {
-            PlayerManager.isGameOver = true; 
-            gameObject.SetActive(false);
-        }
-        base.DestroyObject();
+        _playerController.TakeDamage(1);
     }
 
     protected override void OnHit()

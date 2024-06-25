@@ -8,23 +8,8 @@ public class PlayerCollision : MonoBehaviour
     {
         if (collision.transform.tag == "Enemy")
         {
-            Debug.Log("Player hit by enemy");
-            PlayerLives.lives--;
-            if(PlayerLives.lives <= 0)
-            {
-                PlayerManager.isGameOver = true; 
-                gameObject.SetActive(false);
-            }
-        }
-        
-        if (collision.transform.tag == "Projectile")
-        {
-            PlayerLives.lives--;
-            if(PlayerLives.lives <= 0)
-            {
-                PlayerManager.isGameOver = true; 
-                gameObject.SetActive(false);
-            }
+            PlayerController playerController = GetComponent<PlayerController>();
+            playerController.TakeDamage(1);
         }
 
         if(collision.transform.tag == "BananaProjectile")

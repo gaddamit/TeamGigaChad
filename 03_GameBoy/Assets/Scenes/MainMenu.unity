@@ -398,7 +398,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: c1fc5080bbeb3499a921e5659c04865a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b70b9f65a6e9a457db3ce92eb44cab16, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -433,7 +433,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &248049359
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5663,7 +5663,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &960204059
@@ -5752,7 +5752,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 44.9}
+  m_AnchoredPosition: {x: 0, y: 38}
   m_SizeDelta: {x: 80, y: 15}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1519282397
@@ -11045,7 +11045,7 @@ MonoBehaviour:
   playButton: {fileID: 1519282397}
   quitButton: {fileID: 0}
   audioClips:
-  - {fileID: 8300000, guid: 74a877232a18c4b1789ed2948e5fdfcb, type: 3}
+  - {fileID: 8300000, guid: 9057435cdef794329b57c18184136905, type: 3}
   - {fileID: 8300000, guid: 80ec65df4c8d959499ffd6531d080d6b, type: 3}
 --- !u!1 &1864787903
 GameObject:
@@ -16535,10 +16535,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 7654782120906185995, guid: 4d17c0d1ba771c546a8ac46210062831, type: 3}
-      propertyPath: m_audioClip
-      value: 
-      objectReference: {fileID: 8300000, guid: 74a877232a18c4b1789ed2948e5fdfcb, type: 3}
     - target: {fileID: 7654782121181837256, guid: 4d17c0d1ba771c546a8ac46210062831, type: 3}
       propertyPath: m_IsActive
       value: 1

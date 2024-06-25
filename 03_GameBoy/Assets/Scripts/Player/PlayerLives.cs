@@ -17,9 +17,13 @@ public class PlayerLives : MonoBehaviour
         {
             img.sprite = emptyLives;
         }
-        for (int i = 0; i < lives; i++)
+
+        for (int i = 0; i < hearts.Length; i++)
         {
-            hearts[i].sprite = fullLives;
+            if (i < lives)
+            {
+                hearts[i].sprite = fullLives;
+            }
         }
     }
 }

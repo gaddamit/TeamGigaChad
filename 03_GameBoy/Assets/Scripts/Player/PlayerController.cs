@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerController : Character
 {
@@ -8,7 +9,7 @@ public class PlayerController : Character
     private float vInput;
 
     PlayerAnimationController animController;
-
+    public UnityEvent OnDeathEvent;
     private void Awake()
     {
         animController = GetComponent<PlayerAnimationController>();
@@ -33,6 +34,12 @@ public class PlayerController : Character
 
     void UpdateAnimation()
     {
+        transform.localScale = new Vector3(1, 1, 1);
+        if(hInput < 0)
+        {
+            transform.localScale = new Vector3(-1, 1, 1);
+        }
+        
         animController.SetParameter("X", hInput);
         animController.SetParameter("Y", vInput);
     }
@@ -59,10 +66,8 @@ public class PlayerController : Character
 
     public void APressed()
     {
-        Debug.Log("A Pressed");
-        
         BananaShoot bananaShoot = GetComponent<BananaShoot>();
-        bananaShoot.ShootProjectile();
+        bananaShoot.ShootProjectile(hInput, vInput);
     }
 
     public void BPressed()
@@ -70,4 +75,18 @@ public class PlayerController : Character
         Debug.Log("B Pressed");
     }
     
+    public void TakeDamage(int damage)
+    {
+        PlayerLives.lives -= damage;
+        if(PlayerLives.lives <= 0)
+        {
+            Invoke("OnDeath", 0.5f);
+        }
+    }
+
+    protected override void OnDeath()
+    {
+        gameObject.SetActive(false);
+        OnDeathEvent?.Invoke();
+    }
 }

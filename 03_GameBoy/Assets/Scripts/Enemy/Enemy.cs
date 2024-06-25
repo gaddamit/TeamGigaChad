@@ -1,5 +1,6 @@
 using UnityEngine;
 using DG.Tweening;
+using System;
 
 public class Enemy : Character
 {
@@ -7,6 +8,7 @@ public class Enemy : Character
     private Tween _walkTween;
     [SerializeField] private Projectile _projectilePrefab;
 
+    public Action OnEnemyDeath;
     private PlayerController _playerController;
     // Start is called before the first frame update
     void Start()
@@ -38,6 +40,7 @@ public class Enemy : Character
     private void StartDestroy()
     {
         _playerController.TakeDamage(1);
+        OnEnemyDeath?.Invoke();
     }
 
     protected override void OnHit()
@@ -83,6 +86,7 @@ public class Enemy : Character
             BananaProjectile projectile = collision.gameObject.GetComponent<BananaProjectile>();
             if(projectile != null)
             {
+                OnEnemyDeath?.Invoke();
                 Destroy(gameObject);
             }
         }

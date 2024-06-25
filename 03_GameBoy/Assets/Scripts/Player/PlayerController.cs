@@ -10,10 +10,13 @@ public class PlayerController : Character
 
     PlayerAnimationController animController;
     public UnityEvent OnDeathEvent;
+    private GameManager _gameManager;
     private void Awake()
     {
         animController = GetComponent<PlayerAnimationController>();
+        _gameManager = FindObjectOfType<GameManager>();
     }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,6 +26,11 @@ public class PlayerController : Character
     // Update is called once per frame
     void Update()
     {
+        if(_gameManager.IsGamePaused || _gameManager.IsGameOver)
+        {
+            return;
+        }
+
         hInput = Input.GetAxisRaw("Horizontal");
         vInput = Input.GetAxisRaw("Vertical");
 
@@ -66,6 +74,11 @@ public class PlayerController : Character
 
     public void APressed()
     {
+        if(_gameManager.IsGamePaused || _gameManager.IsGameOver)
+        {
+            return;
+        }
+        
         BananaShoot bananaShoot = GetComponent<BananaShoot>();
         bananaShoot.ShootProjectile(hInput, vInput);
     }

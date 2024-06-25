@@ -4,11 +4,24 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    private bool _isGamePaused = false;
+    public bool IsGamePaused
+    {
+        get => _isGamePaused;
+        set => _isGamePaused = value;
+    }
     private bool _isGameOver = false;
+    public bool IsGameOver
+    {
+        get => _isGameOver;
+        set => _isGameOver = value;
+    }
+
     [SerializeField] private AudioClip[] audioClips;
     
     public GameObject gameOverMenu;
     public GameObject gamePausedMenu;
+    public GameObject gameCompleteMenu;
 
     private GBConsoleController gb;
     // Start is called before the first frame update
@@ -45,12 +58,38 @@ public class GameManager : MonoBehaviour
 
     public void ShowGamePaused()
     {
+        if(_isGameOver || _isGamePaused)
+        {
+            return;
+        }
+        
+        _isGamePaused = true;
+        Time.timeScale = 0;
         gamePausedMenu.SetActive(true);
+    }
+
+    public void ShowLevelComplete()
+    {
+        if(_isGameOver || _isGamePaused)
+        {
+            return;
+        }
+
+        _isGameOver = true;
+        Time.timeScale = 0;
+        gameCompleteMenu.SetActive(true);
     }
 
     public void ResumeGame()
     {
+        Time.timeScale = 1;
         gamePausedMenu.SetActive(false);
+        Invoke("DelayUnpause", 0.1f);
+    }
+
+    private void DelayUnpause()
+    {
+        _isGamePaused = false;
     }
 
     public void RestartGame()

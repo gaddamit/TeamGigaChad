@@ -1,7 +1,6 @@
-﻿namespace Dreamteck.Forever
-{
+﻿
     using UnityEngine;
-
+    using Dreamteck.Forever;
     public class Player : MonoBehaviour
     {
         LaneRunner runner;
@@ -87,4 +86,3 @@
             return speed;
         }
     }
-}

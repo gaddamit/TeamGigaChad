@@ -14,6 +14,9 @@
         Material material;
         private Rigidbody rb;
         private bool isJumping = false;
+
+        [SerializeField] private float magnetPullSpeed = 1.75f;
+        
         private void Awake()
         {
             runner = GetComponent<LaneRunner>();
@@ -24,6 +27,8 @@
             
             MathGate.onAnswer += OnAnswer;
             EndScreen.onRestartClicked += OnRestart;
+
+            MagnetPowerUp.OnMagnetPowerupCollected += PowerUpCollected;
         }
 
         void OnRestart()
@@ -84,5 +89,23 @@
         public float GetSpeed()
         {
             return speed;
+        }
+
+        private void PowerUpCollected(IPowerUp powerUp)
+        {
+            if (powerUp is MagnetPowerUp)
+            {
+                PullPellets();
+            }
+        }
+
+        void PullPellets()
+        {
+            GameObject[] pellets = GameObject.FindGameObjectsWithTag("Pellet");
+
+            foreach (GameObject pellet in pellets)
+            {
+                pellet.transform.position = Vector3.Lerp(pellet.transform.position, transform.position, Time.fixedDeltaTime * magnetPullSpeed);
+            }
         }
     }

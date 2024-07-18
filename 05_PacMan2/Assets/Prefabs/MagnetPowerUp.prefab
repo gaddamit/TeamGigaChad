@@ -119,4 +119,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   magnetSound: {fileID: 8300000, guid: 70858ddbabeab174a9d8bebe15411db7, type: 3}
-  magnetDuration: 6
+  magnetDuration: 1

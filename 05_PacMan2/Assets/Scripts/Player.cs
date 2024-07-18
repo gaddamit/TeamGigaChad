@@ -16,6 +16,7 @@
         private bool isJumping = false;
 
         [SerializeField] private float magnetPullSpeed = 1.75f;
+        [SerializeField] private float threshold = 1f;
         
         private void Awake()
         {
@@ -93,19 +94,19 @@
 
         private void PowerUpCollected(IPowerUp powerUp)
         {
+            
             if (powerUp is MagnetPowerUp)
             {
-                PullPellets();
-            }
-        }
+                GameObject[] pellets = GameObject.FindGameObjectsWithTag("Pellet");
+                
+                Debug.Log($"there are {pellets.Length} Pellets");
 
-        void PullPellets()
-        {
-            GameObject[] pellets = GameObject.FindGameObjectsWithTag("Pellet");
-
-            foreach (GameObject pellet in pellets)
-            {
-                pellet.transform.position = Vector3.Lerp(pellet.transform.position, transform.position, Time.fixedDeltaTime * magnetPullSpeed);
+                foreach (GameObject pellet in pellets)
+                {
+                    if (Vector3.Distance(pellet.transform.position, transform.position) > threshold)
+                        pellet.transform.position = transform.position;
+                    ;
+                }
             }
         }
     }

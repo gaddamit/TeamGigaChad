@@ -9,7 +9,7 @@ public class Collectable : MonoBehaviour
     public static event Action OnPelletCollected;
 
     [SerializeField] private AudioClip pelletSound;
-    
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))

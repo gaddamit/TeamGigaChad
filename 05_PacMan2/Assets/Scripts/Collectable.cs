@@ -25,7 +25,14 @@ public class Collectable : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             onCollect?.Invoke();
-            Destroy(gameObject);
+            MeshRenderer meshRenderer = GetComponent<MeshRenderer>();
+            meshRenderer.enabled = false;
+            Invoke("DelayedDestroy", 1.0f);
         }
+    }
+
+    private void DelayedDestroy()
+    {
+        Destroy(gameObject);
     }
 }

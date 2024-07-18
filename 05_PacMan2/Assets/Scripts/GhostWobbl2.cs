@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
-public class GhostWobble : MonoBehaviour
+public class GhostWobble2 : MonoBehaviour
 {
     [SerializeField]
     private bool isMovingRight = true;
@@ -32,15 +32,6 @@ public class GhostWobble : MonoBehaviour
         {
             transform.localRotation = Quaternion.Euler(0, -90, 0);
             isMovingRight = true;
-        }
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            Player player = other.GetComponent<Player>();
-            player.OnDeath();
         }
     }
 }

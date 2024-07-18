@@ -11,7 +11,8 @@ public class GameManager : MonoBehaviour
     public TMP_Text scoreText;
     public Player player;
 
-
+    public TMP_Text menuScoreText;
+    public TMP_Text menuScoreTextShadow;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,8 +29,8 @@ public class GameManager : MonoBehaviour
     {
         _score += 10;
         scoreText.text = _score.ToString();
-        Debug.Log("Player collected a collectable: " + _score);
-
+        menuScoreText.text = _score.ToString();
+        menuScoreTextShadow.text = _score.ToString();
         if(_score % _scoreInterval == 0)
         {
             player.IncreaseSpeed();

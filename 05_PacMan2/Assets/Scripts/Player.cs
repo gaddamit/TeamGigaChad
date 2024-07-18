@@ -52,6 +52,11 @@ public class Player : MonoBehaviour
 
         private void Update()
         {
+            if(isDead)
+            {
+                return;
+            }
+            
             if (boost == 0f)
             {
                 //Lane switching logic

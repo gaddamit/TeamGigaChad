@@ -6,7 +6,7 @@ namespace Dreamteck.Forever
     using Dreamteck.Splines;
     using System;
 
-    public class MathCamera : MonoBehaviour
+    public class CameraFollow : MonoBehaviour
     {
         public LaneRunner runner;
         SplineSample evalResult = new SplineSample();

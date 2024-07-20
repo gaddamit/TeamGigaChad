@@ -1,9 +1,7 @@
 ﻿
     using UnityEngine;
     using Dreamteck.Forever;
-using UnityEngine.Events;
-using Unity.VisualScripting;
-public class Player : MonoBehaviour
+    public class Player : MonoBehaviour
     {
         LaneRunner runner;
         float boost = 0f;
@@ -16,15 +14,10 @@ public class Player : MonoBehaviour
         Material material;
         private Rigidbody rb;
         private bool isJumping = false;
-        [SerializeField]
-        private float _speedCap = 50;
-        [SerializeField]
-        private float _speedIncrement = 0.5f;
-        private bool isDead = false;
-        private Animator _animator;
+
+        [SerializeField] private float magnetPullSpeed = 1.75f;
+        [SerializeField] private float threshold = 1f;
         
-        public UnityEvent onDeath;
-        public UnityEvent onCleanup;
         private void Awake()
         {
             runner = GetComponent<LaneRunner>();
@@ -33,7 +26,10 @@ public class Player : MonoBehaviour
             //material = GetComponent<MeshRenderer>().sharedMaterial;
             rb = GetComponent<Rigidbody>();
             
-            _animator = GetComponent<Animator>();
+            MathGate.onAnswer += OnAnswer;
+            EndScreen.onRestartClicked += OnRestart;
+
+            MagnetPowerUp.OnMagnetPowerupCollected += PowerUpCollected;
         }
 
         void OnRestart()
@@ -52,13 +48,9 @@ public class Player : MonoBehaviour
 
         private void Update()
         {
-            if(isDead)
-            {
-                return;
-            }
-            
             if (boost == 0f)
             {
+                Debug.Log("Boost is 0");
                 //Lane switching logic
                 if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A)) runner.lane--;
                 if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D)) runner.lane++;
@@ -92,7 +84,7 @@ public class Player : MonoBehaviour
         {
             this.speed = speed;
             runner.followSpeed = speed;
-            //if(speed == 0f) EndScreen.Open();
+            if(speed == 0f) EndScreen.Open();
         }
 
         public float GetSpeed()
@@ -100,31 +92,21 @@ public class Player : MonoBehaviour
             return speed;
         }
 
-        public void IncreaseSpeed()
+        private void PowerUpCollected(IPowerUp powerUp)
         {
-            if(speed < _speedCap)
-            {
-                SetSpeed(speed + _speedIncrement);
-            }
-        }
-
-        public void OnDeath()
-        {
-            if(isDead)
-            {
-                return;
-            }
-
-            isDead = true;
-            _animator.SetTrigger("Death");
-            SetSpeed(0f);
             
-            onDeath?.Invoke();
-            Invoke("CleanUp", 3.0f);
-        }
+            if (powerUp is MagnetPowerUp)
+            {
+                GameObject[] pellets = GameObject.FindGameObjectsWithTag("Pellet");
+                
+                Debug.Log($"there are {pellets.Length} Pellets");
 
-        public void CleanUp()
-        {
-            onCleanup?.Invoke();
+                foreach (GameObject pellet in pellets)
+                {
+                    if (Vector3.Distance(pellet.transform.position, transform.position) > threshold)
+                        pellet.transform.position = transform.position;
+                    ;
+                }
+            }
         }
     }

@@ -1618,7 +1618,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'PAC
+  m_text: 'PAC-
 
     RUNNER'
   m_isRightToLeft: 0

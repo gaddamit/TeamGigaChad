@@ -26,7 +26,7 @@ public class GameManager : Singleton<GameManager>
     {
         score += 10;
         scoreText.text = $"{score}";
-        Debug.Log($"Player collected a collectable: {score}");
+        //Debug.Log($"Player collected a collectable: {score}");
 
         if(score % 100 == 0)
         {

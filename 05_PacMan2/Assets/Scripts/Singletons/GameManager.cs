@@ -1,37 +1,34 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using Unity.VisualScripting;
 
 public class GameManager : Singleton<GameManager>
 {
-    private int score = 0;
+    private int _score = 0;
+    [SerializeField]
+    private int _scoreIntervals = 100;
     public TMP_Text scoreText;
     public Player player;
 
     public override void Awake()
     {
         base.Awake();
-        Collectable.OnPelletCollected += CollectableCollected;
+        //Collectable.OnCollectableCollected += CollectableCollected;
     }
 
     private void OnDisable()
     {
-        Collectable.OnPelletCollected -= CollectableCollected;
+        //Collectable.OnCollectableCollected -= CollectableCollected;
     }
 
-    public void CollectableCollected()
+    public void CollectableCollected(int score)
     {
-        score += 10;
-        scoreText.text = $"{score}";
-        //Debug.Log($"Player collected a collectable: {score}");
+        /*_score += score;
+        scoreText.text = $"{_score}";
 
-        if(score % 100 == 0)
+        if(score % _scoreIntervals == 0)
         {
-            float currentSpeed = player.GetSpeed();
-            player.SetSpeed(currentSpeed *= 1.15f);
-        }
+            player.IncreaseSpeed();
+        }*/
     }
 }

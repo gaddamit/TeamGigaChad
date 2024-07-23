@@ -13,22 +13,27 @@ public class GameManager : Singleton<GameManager>
     public override void Awake()
     {
         base.Awake();
-        //Collectable.OnCollectableCollected += CollectableCollected;
+        
     }
 
     private void OnDisable()
     {
-        //Collectable.OnCollectableCollected -= CollectableCollected;
+        
     }
 
-    public void CollectableCollected(int score)
+    public void IncreaseScore(int score)
     {
-        /*_score += score;
+        _score += score;
         scoreText.text = $"{_score}";
 
-        if(score % _scoreIntervals == 0)
+        if((_score % _scoreIntervals) == 0)
         {
             player.IncreaseSpeed();
-        }*/
+        }
     }
+
+    public void GameOver()
+    {
+        //UIManager.Instance.ShowGameOverScreen();
+    }   
 }

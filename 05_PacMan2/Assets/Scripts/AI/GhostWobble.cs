@@ -8,10 +8,6 @@ public class GhostWobble : MonoBehaviour
     private bool isMovingRight = true;
     [SerializeField]
     private float _speed = 2;
-	public GameObject Ghost1;
-	public GameObject Ghost2;
-	public GameObject Ghost3;
-	public GameObject Ghost4;
 
     // Start is called before the first frame update
     void Start()
@@ -37,7 +33,7 @@ public class GhostWobble : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && (other.GetType() == typeof(BoxCollider)))
         {
             Player player = other.GetComponent<Player>();
             player.OnDeath();

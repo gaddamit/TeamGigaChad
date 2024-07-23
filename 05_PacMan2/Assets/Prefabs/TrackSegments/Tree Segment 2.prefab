@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1165600027319260584}
   - component: {fileID: 7785843639031599074}
   m_Layer: 0
-  m_Name: Empty Segment Trees 1
+  m_Name: Tree Segment 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -296,11 +296,11 @@ MonoBehaviour:
     - {fileID: 1055813984510908666}
     _isRoot: 0
   bounds:
-    center: {x: -0.37750006, y: 2.4458447, z: 0.00000047683716}
-    extents: {x: 9.547501, y: 2.724155, z: 12.140003}
-    max: {x: 9.17, y: 5.1699996, z: 12.140003}
-    min: {x: -9.925, y: -0.27831015, z: -12.140002}
-    size: {x: 19.095001, y: 5.44831, z: 24.280006}
+    center: {x: 0.09250021, y: 2.4458447, z: 0.00000047683716}
+    extents: {x: 10.3925, y: 2.724155, z: 12.140003}
+    max: {x: 10.485, y: 5.1699996, z: 12.140003}
+    min: {x: -10.299999, y: -0.27831015, z: -12.140002}
+    size: {x: 20.785, y: 5.44831, z: 24.280006}
   builders: []
   unpacked: 0
   alwaysDraw: 0
@@ -321,7 +321,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2355658169256708718, guid: 91b778c899cbdc547bce79f65c9fbcb6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -7.01
+      value: 8.2
       objectReference: {fileID: 0}
     - target: {fileID: 2355658169256708718, guid: 91b778c899cbdc547bce79f65c9fbcb6, type: 3}
       propertyPath: m_LocalPosition.y
@@ -329,7 +329,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2355658169256708718, guid: 91b778c899cbdc547bce79f65c9fbcb6, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -10.1
+      value: -3.63
       objectReference: {fileID: 0}
     - target: {fileID: 2355658169256708718, guid: 91b778c899cbdc547bce79f65c9fbcb6, type: 3}
       propertyPath: m_LocalRotation.w
@@ -419,7 +419,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4221825511701741922, guid: 696ed7fcd8194b946bbcab90e128a6e6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.57
+      value: -7.7
       objectReference: {fileID: 0}
     - target: {fileID: 4221825511701741922, guid: 696ed7fcd8194b946bbcab90e128a6e6, type: 3}
       propertyPath: m_LocalPosition.y
@@ -427,7 +427,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4221825511701741922, guid: 696ed7fcd8194b946bbcab90e128a6e6, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 8.38
+      value: 6.04
       objectReference: {fileID: 0}
     - target: {fileID: 4221825511701741922, guid: 696ed7fcd8194b946bbcab90e128a6e6, type: 3}
       propertyPath: m_LocalRotation.w

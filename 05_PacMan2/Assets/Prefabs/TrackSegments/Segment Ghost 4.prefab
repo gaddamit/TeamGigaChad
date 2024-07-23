@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7785843639031599074}
   - component: {fileID: 7380025038322936063}
   m_Layer: 0
-  m_Name: Empty Segment 2
+  m_Name: Segment Ghost 4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

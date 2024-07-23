@@ -1,18 +1,27 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
-public class PowerUp : MonoBehaviour
+public class PowerUp : Collectable, IPowerUp
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] protected float _duration = 3f;
+    
+    private void Start()
     {
-        
+        StartAnimating();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void StartAnimating()
     {
-        
+        transform.DOScale(new Vector3(0.75f, 0.75f, 0.75f), 0.5f).SetLoops(-1, LoopType.Yoyo);
+    }
+
+    protected override void OnTriggerEnter(Collider other)
+    {
+        base.OnTriggerEnter(other);
+    }
+
+    public void ApplyPowerUp()
+    {
+        throw new System.NotImplementedException();
     }
 }

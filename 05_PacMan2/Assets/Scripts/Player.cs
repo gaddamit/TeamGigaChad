@@ -37,7 +37,7 @@ public class Player : MonoBehaviour
         instance = this;
         rb = GetComponent<Rigidbody>();
 
-        MagnetPowerUp.OnMagnetPowerupCollected += PowerUpCollected;
+        //MagnetPowerUp.OnMagnetPowerupCollected += PowerUpCollected;
     }
 
     void OnRestart()
@@ -113,7 +113,7 @@ public class Player : MonoBehaviour
         onCleanup?.Invoke();
     }
 
-    private void PowerUpCollected(IPowerUp powerUp)
+    /*private void PowerUpCollected(IPowerUp powerUp)
     {
         
         if (powerUp is MagnetPowerUp)
@@ -129,5 +129,5 @@ public class Player : MonoBehaviour
                 ;
             }
         }
-    }
+    }*/
 }

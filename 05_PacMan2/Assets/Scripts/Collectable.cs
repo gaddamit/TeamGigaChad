@@ -6,17 +6,21 @@ using UnityEngine.Events;
 
 public class Collectable : MonoBehaviour
 {
-    public static event Action OnCollectableCollected;
-
+    public UnityEvent OnCollectableCollectedEvent;
     [SerializeField] private AudioClip collectableSound;
 
-    private void OnTriggerEnter(Collider other)
+    protected virtual void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && (other.GetType() == typeof(BoxCollider)))
         {
+            OnCollectableCollectedEvent?.Invoke();
+            PlaySoundEffect();
             Destroy(gameObject);
-            OnCollectableCollected?.Invoke();
-            AudioManager.Instance.PlaySoundEffect(collectableSound);
         }
+    }
+
+    protected virtual void PlaySoundEffect()
+    {
+        AudioManager.Instance.PlaySoundEffect(collectableSound);
     }
 }

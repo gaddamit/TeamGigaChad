@@ -974,6 +974,10 @@ PrefabInstance:
       value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 2948348679247682283, guid: 2cf6259cea6a84333aca69fde38cc141, type: 3}
+      propertyPath: _speedCap
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 2948348679247682283, guid: 2cf6259cea6a84333aca69fde38cc141, type: 3}
       propertyPath: _speedIncrement
       value: 1
       objectReference: {fileID: 0}

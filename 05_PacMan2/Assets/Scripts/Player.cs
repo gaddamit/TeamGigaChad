@@ -14,21 +14,17 @@ public class Player : MonoBehaviour
     public Color boostColor;
     Material material;
     private Rigidbody rb;
-    private bool isJumping = false;
-
-    [SerializeField] private float magnetPullSpeed = 1.75f;
-    [SerializeField] private float threshold = 1f;
+    private bool _isJumping = false;
     
     [SerializeField]
     private float _speedCap = 50;
     [SerializeField]
     private float _speedIncrement = 0.5f;
-    private bool isDead = false;
+    private bool _isDead = false;
     private Animator _animator;
 
-
     public UnityEvent onDeath;
-    public UnityEvent onCleanup;
+    public UnityEvent onGameOver;
 
     private void Awake()
     {
@@ -36,8 +32,6 @@ public class Player : MonoBehaviour
         startSpeed = speed = runner.followSpeed;
         instance = this;
         rb = GetComponent<Rigidbody>();
-
-        //MagnetPowerUp.OnMagnetPowerupCollected += PowerUpCollected;
     }
 
     void OnRestart()
@@ -48,7 +42,7 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        if(isDead)
+        if(_isDead)
         {
             return;
         }
@@ -60,16 +54,16 @@ public class Player : MonoBehaviour
         //Capture Boost Input
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            isJumping = true;
+            _isJumping = true;
         }
     }
 
     private void FixedUpdate()
     {
-        if (isJumping)
+        if (_isJumping)
         {
             rb.AddForce(Vector3.up * 10, ForceMode.Impulse);
-            isJumping = false;
+            _isJumping = false;
         }
     }
 
@@ -95,39 +89,21 @@ public class Player : MonoBehaviour
 
     public void OnDeath()
     {
-        if(isDead)
+        if(_isDead)
         {
             return;
         }
 
-        isDead = true;
+        _isDead = true;
         _animator.SetTrigger("Death");
         SetSpeed(0f);
         
         onDeath?.Invoke();
-        Invoke("CleanUp", 3.0f);
+        Invoke("GameOver", 3.0f);
     }
 
-    public void CleanUp()
+    public void GameOver()
     {
-        onCleanup?.Invoke();
+        onGameOver?.Invoke();
     }
-
-    /*private void PowerUpCollected(IPowerUp powerUp)
-    {
-        
-        if (powerUp is MagnetPowerUp)
-        {
-            GameObject[] pellets = GameObject.FindGameObjectsWithTag("Pellet");
-            
-            Debug.Log($"there are {pellets.Length} Pellets");
-
-            foreach (GameObject pellet in pellets)
-            {
-                if (Vector3.Distance(pellet.transform.position, transform.position) > threshold)
-                    pellet.transform.position = transform.position;
-                ;
-            }
-        }
-    }*/
 }

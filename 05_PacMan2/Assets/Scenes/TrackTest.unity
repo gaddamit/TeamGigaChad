@@ -391,7 +391,7 @@ MonoBehaviour:
   _useUnloadUnusedAssets: 0
   _loopSegmentLogic: 0
   _levelCollection:
-  - {fileID: 11400000, guid: bcb2d66595ce74d22b6017d2edad226a, type: 2}
+  - {fileID: 11400000, guid: 1bf51a68f222e44a6ad33e9cb4b6ff06, type: 2}
   _levelIteration: 2
   _levelRandomizer: {fileID: 0}
   _generationRandomizer: {fileID: 0}
@@ -969,6 +969,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 617198340}
     m_Modifications:
+    - target: {fileID: 1500089534930290416, guid: 2cf6259cea6a84333aca69fde38cc141, type: 3}
+      propertyPath: followSpeed
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 2948348679247682283, guid: 2cf6259cea6a84333aca69fde38cc141, type: 3}
       propertyPath: _speedIncrement
       value: 1

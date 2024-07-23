@@ -5,33 +5,36 @@ using UnityEngine.Events;
 public class Player : MonoBehaviour
 {
     LaneRunner runner;
-    float boost = 0f;
     public static Player instance;
-    bool canBoost = true;
-    float speed = 0f;
-    float startSpeed = 0f;
-    public Color regularColor;
-    public Color boostColor;
-    Material material;
-    private Rigidbody rb;
+    private Rigidbody _rigidBody;
     private bool _isJumping = false;
     
+    private bool _isDead = false;
+    private Animator _animator;
+    
+    float speed = 0f;
+    float startSpeed = 0f;
+    [Header("Speed Settings")]
     [SerializeField]
     private float _speedCap = 50;
     [SerializeField]
     private float _speedIncrement = 0.5f;
-    private bool _isDead = false;
-    private Animator _animator;
 
+    [Header("Events")]
     public UnityEvent onDeath;
     public UnityEvent onGameOver;
+
+    [SerializeField]
+    private AudioClip _deathSound;
 
     private void Awake()
     {
         runner = GetComponent<LaneRunner>();
         startSpeed = speed = runner.followSpeed;
         instance = this;
-        rb = GetComponent<Rigidbody>();
+        _rigidBody = GetComponent<Rigidbody>();
+
+        _animator = GetComponent<Animator>();
     }
 
     void OnRestart()
@@ -62,7 +65,7 @@ public class Player : MonoBehaviour
     {
         if (_isJumping)
         {
-            rb.AddForce(Vector3.up * 10, ForceMode.Impulse);
+            _rigidBody.AddForce(Vector3.up * 10, ForceMode.Impulse);
             _isJumping = false;
         }
     }
@@ -71,7 +74,6 @@ public class Player : MonoBehaviour
     {
         this.speed = speed;
         runner.followSpeed = speed;
-        if(speed == 0f) EndScreen.Open();
     }
 
     public float GetSpeed()
@@ -95,9 +97,9 @@ public class Player : MonoBehaviour
         }
 
         _isDead = true;
-        _animator.SetTrigger("Death");
         SetSpeed(0f);
-        
+        PlayDeathSequence();
+
         onDeath?.Invoke();
         Invoke("GameOver", 3.0f);
     }
@@ -105,5 +107,18 @@ public class Player : MonoBehaviour
     public void GameOver()
     {
         onGameOver?.Invoke();
+    }
+
+    private void PlayDeathSequence()
+    {
+        if(_animator != null)
+        {
+            _animator.SetTrigger("Death");
+        }
+
+        if(_deathSound != null)
+        {
+            AudioManager.Instance.PlaySoundEffect(_deathSound);
+        }
     }
 }

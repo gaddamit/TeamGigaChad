@@ -274,3 +274,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   regularColor: {r: 0, g: 0, b: 0, a: 0}
   boostColor: {r: 0, g: 0, b: 0, a: 0}
+  _speedCap: 60
+  _speedIncrement: 1
+  onDeath:
+    m_PersistentCalls:
+      m_Calls: []
+  onGameOver:
+    m_PersistentCalls:
+      m_Calls: []

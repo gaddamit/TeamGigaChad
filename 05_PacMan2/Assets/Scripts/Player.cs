@@ -32,8 +32,8 @@ public class Player : MonoBehaviour
         runner = GetComponent<LaneRunner>();
         startSpeed = speed = runner.followSpeed;
         instance = this;
-        _rigidBody = GetComponent<Rigidbody>();
 
+        _rigidBody = GetComponent<Rigidbody>();
         _animator = GetComponent<Animator>();
     }
 
@@ -106,7 +106,7 @@ public class Player : MonoBehaviour
 
     public void GameOver()
     {
-        onGameOver?.Invoke();
+        GameManager.Instance.GameOver();
     }
 
     private void PlayDeathSequence()

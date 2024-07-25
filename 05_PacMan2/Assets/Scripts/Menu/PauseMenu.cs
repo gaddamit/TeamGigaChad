@@ -13,6 +13,7 @@ public class PauseMenu : MonoBehaviour
 
     public void Home()
     {
+        GameManager.Instance.ResetScore();
         SceneManager.LoadScene("MainMenu");
         Time.timeScale = 1;
     }
@@ -25,6 +26,7 @@ public class PauseMenu : MonoBehaviour
 
     public void Restart()
     {
+        GameManager.Instance.ResetScore();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         Time.timeScale = 1;
     }

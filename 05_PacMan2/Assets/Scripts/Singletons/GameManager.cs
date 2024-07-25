@@ -12,10 +12,16 @@ public class GameManager : Singleton<GameManager>
     public Player player;
 
     public UnityEvent onGameOver;
+    private PauseMenu _diedMenu;
     public override void Awake()
     {
         base.Awake();
-        
+        //onGameOver += _diedMenu.
+    }
+
+    private void Start()
+    {
+        _diedMenu = GameObject.Find("PlayerDied").GetComponent<PauseMenu>();
     }
 
     private void OnDisable()
@@ -44,8 +50,15 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
+    public void ResetScore()
+    {
+        _score = 0;
+        _scoreText.text = $"{_score}";
+    }
+
     public void GameOver()
     {
-        onGameOver.Invoke();
+        Debug.Log("Game Over");
+        onGameOver?.Invoke();
     }   
 }

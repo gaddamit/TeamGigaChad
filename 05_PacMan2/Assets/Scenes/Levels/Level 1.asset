@@ -255,7 +255,7 @@ MonoBehaviour:
         _pool: 0
         _poolParent: {fileID: 0}
       - nested: 0
-        randomPickChance: 0.13333334
+        randomPickChance: 0.14444445
         _prefab: {fileID: 7971326914115165083, guid: 72e0058a8b92b4ec689fdd7b064db12c, type: 3}
         _segmentPool: []
         _pool: 0
@@ -517,7 +517,7 @@ MonoBehaviour:
         _pool: 0
         _poolParent: {fileID: 0}
       - nested: 0
-        randomPickChance: 0.13333334
+        randomPickChance: 0.14444445
         _prefab: {fileID: 7971326914115165083, guid: 72e0058a8b92b4ec689fdd7b064db12c, type: 3}
         _segmentPool: []
         _pool: 0

@@ -16,12 +16,11 @@ public class GameManager : Singleton<GameManager>
     public override void Awake()
     {
         base.Awake();
-        //onGameOver += _diedMenu.
     }
 
     private void Start()
     {
-        _diedMenu = GameObject.Find("PlayerDied").GetComponent<PauseMenu>();
+        InitializeScoreText();
     }
 
     private void OnDisable()
@@ -29,12 +28,17 @@ public class GameManager : Singleton<GameManager>
         
     }
 
-    public void IncreaseScore(int score)
+    private void InitializeScoreText()
     {
         if(_scoreText == null)
         {
             _scoreText = GameObject.Find("ScoreValue").GetComponent<TMP_Text>();
         }
+    }
+
+    public void IncreaseScore(int score)
+    {
+        InitializeScoreText();
 
         _score += score;
         _scoreText.text = $"{_score}";
@@ -52,13 +56,15 @@ public class GameManager : Singleton<GameManager>
 
     public void ResetScore()
     {
+        InitializeScoreText();
+
         _score = 0;
         _scoreText.text = $"{_score}";
     }
 
     public void GameOver()
     {
-        Debug.Log("Game Over");
-        onGameOver?.Invoke();
+        _diedMenu = GameObject.Find("PlayerDied").GetComponent<PauseMenu>();
+        _diedMenu.Pause();
     }   
 }

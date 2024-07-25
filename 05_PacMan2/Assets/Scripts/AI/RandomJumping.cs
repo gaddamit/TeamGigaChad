@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using DG.Tweening;
 
-public class GhostWobble2 : MonoBehaviour
+public class RandomJumping : MonoBehaviour
 {
     [SerializeField]
     private bool isMovingRight = true;
@@ -23,6 +23,7 @@ public class GhostWobble2 : MonoBehaviour
         int randomX = Random.Range(-1, 2);
         int randomZ = Random.Range(-1, 2);
         transform.DOLocalJump(new Vector3(3 * randomX,2,3 * randomZ), _jumpHeight, 1, _speed).SetEase(Ease.Linear);
+        transform.localRotation = Quaternion.Euler(0, Random.Range(0,361), 0);
     }
 
     private void OnTriggerEnter(Collider other)

@@ -8,6 +8,8 @@ public class SidewaysMovement : MonoBehaviour
     private bool isMovingRight = true;
     [SerializeField]
     private float _speed = 2;
+    [SerializeField]
+    private bool _shouldDieOnCollision = true;
 
     // Start is called before the first frame update
     void Start()
@@ -36,7 +38,10 @@ public class SidewaysMovement : MonoBehaviour
         if (other.CompareTag("Player") && (other.GetType() == typeof(BoxCollider)))
         {
             Player player = other.GetComponent<Player>();
-            player.OnDeath();
+            if(_shouldDieOnCollision)
+            {
+                player?.OnDeath();
+            }
         }
     }
 }

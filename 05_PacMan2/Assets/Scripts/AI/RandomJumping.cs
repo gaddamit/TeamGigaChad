@@ -10,6 +10,8 @@ public class RandomJumping : MonoBehaviour
     private float _speed = 2;
     [SerializeField]
     private float _jumpHeight = 4;
+    [SerializeField]
+    private bool _shouldDieOnCollision = true;
 
     // Start is called before the first frame update
     void Start()
@@ -31,7 +33,10 @@ public class RandomJumping : MonoBehaviour
         if (other.CompareTag("Player") && (other.GetType() == typeof(BoxCollider)))
         {
             Player player = other.GetComponent<Player>();
-            player.OnDeath();
+            if(_shouldDieOnCollision)
+            {
+                player?.OnDeath();
+            }
         }
     }
 }

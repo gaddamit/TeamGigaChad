@@ -13,6 +13,7 @@ public class AudioManager : Singleton<AudioManager>
         
     }
     
+    // Play a sound effect
     public void PlaySoundEffect(AudioClip clip)
     {
         if (clip == null) return;
@@ -23,6 +24,8 @@ public class AudioManager : Singleton<AudioManager>
         _source.PlayOneShot(clip);
     }
 
+    // Play a sound effect with a duration
+    // This is useful for sounds that need to be looped
     public void PlayLoopedSound(AudioClip clip, float soundDuration, bool isLooped)
     {
         if (clip == null) return;
@@ -42,6 +45,7 @@ public class AudioManager : Singleton<AudioManager>
         }
     }
 
+    // Play music
     public void PlayMusic(AudioClip clip, GameObject sourceObject, bool isLooped)
     {
         if (clip == null)  return;

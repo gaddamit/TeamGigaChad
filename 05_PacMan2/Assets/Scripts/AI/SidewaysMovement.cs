@@ -1,11 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+
+// This script is used to make an object move sideways
 public class SidewaysMovement : MonoBehaviour
 {
     [SerializeField]
     private bool isMovingRight = true;
+    [SerializeField]
+    private float _xPosition = 3;
     [SerializeField]
     private float _speed = 2;
     [SerializeField]
@@ -14,11 +16,14 @@ public class SidewaysMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // Move the ghost sideways
         float z = transform.localPosition.z;
-        transform.DOLocalMove(new Vector3(isMovingRight ? 3 : -3, 2, z), _speed).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.Linear);
+        transform.DOLocalMove(new Vector3(isMovingRight ? _xPosition : -_xPosition, 2, z), _speed).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.Linear);
+
         InvokeRepeating("RotateGhost", 0, _speed);
     }
 
+    // Face the ghost in the direction it is moving
     private void RotateGhost()
     {
         if (isMovingRight)

@@ -23,11 +23,7 @@ public class GameManager : Singleton<GameManager>
         InitializeScoreText();
     }
 
-    private void OnDisable()
-    {
-        
-    }
-
+    // Initialize the score text object
     private void InitializeScoreText()
     {
         if(_scoreText == null)
@@ -36,6 +32,8 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
+    // Increase the score by the given value
+    // Increase the player speed every _scoreIntervals
     public void IncreaseScore(int score)
     {
         InitializeScoreText();
@@ -54,6 +52,7 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
+    // Reset the score to 0
     public void ResetScore()
     {
         InitializeScoreText();
@@ -62,6 +61,7 @@ public class GameManager : Singleton<GameManager>
         _scoreText.text = $"{_score}";
     }
 
+    // Game over event
     public void GameOver()
     {
         _diedMenu = GameObject.Find("PlayerDied").GetComponent<PauseMenu>();

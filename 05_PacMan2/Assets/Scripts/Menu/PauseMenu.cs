@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Events;
 
+// Handle the pause menu functionality
 public class PauseMenu : MonoBehaviour
 {
     private Vector3 _initialPosition;

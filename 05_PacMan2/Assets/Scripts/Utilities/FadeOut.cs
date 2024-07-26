@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 
+// Used for the blur vision effect
 public class FadeOut : MonoBehaviour
 {
     private Tween _fadeTween;

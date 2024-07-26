@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using DG.Tweening;
 
+// This script is used to make an object jump to random positions
 public class RandomJumping : MonoBehaviour
 {
     [SerializeField]
@@ -20,6 +21,7 @@ public class RandomJumping : MonoBehaviour
         InvokeRepeating("Jump", 0, _speed);
     }
 
+    // Finds a random position to jump to
     private void Jump()
     {
         int randomX = Random.Range(-1, 2);

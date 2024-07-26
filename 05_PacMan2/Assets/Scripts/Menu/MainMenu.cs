@@ -15,7 +15,7 @@ public class MainMenu : MonoBehaviour
         Cursor.visible = true;
 
 #if UNITY_WEBGL
-        //playButton.gameObject.transform.localPosition = new Vector3(0, -400, 0);
+        // Quit Button removed for WebGL build
         quitButton.gameObject.SetActive(false);
 #endif
     }

@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using DG.Tweening;
 
+// This script is used to create a magnetic power-up
 public class Magnetic : MonoBehaviour
 {
     private float _duration;
@@ -15,7 +16,7 @@ public class Magnetic : MonoBehaviour
 
     private void Start()
     {
-        //Add sphere collider to player
+        // Add sphere collider to player
         _sphereCollider = gameObject.AddComponent<SphereCollider>();
         _sphereCollider.radius = _sphereRadius;
         _sphereCollider.isTrigger = true;
@@ -23,7 +24,7 @@ public class Magnetic : MonoBehaviour
         Invoke("RemoveMagnetic", _duration);
     }
 
-    //When pellet enters sphere collider, move pellet towards player
+    // When pellet enters sphere collider, move pellet towards player
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Pellet"))
@@ -32,12 +33,14 @@ public class Magnetic : MonoBehaviour
         }
     }
 
+    // If the player picks up another magnet, reset the duration
     public void ResetDuration()
     {
         CancelInvoke("RemoveMagnetic");
         Invoke("RemoveMagnetic", _duration);
     }
 
+    // Remove the magnetic power-up
     private void RemoveMagnetic()
     {
         Destroy(_sphereCollider);

@@ -12,6 +12,8 @@ public class PowerUp : Collectable, IPowerUp
 
     private void StartAnimating()
     {
+        // Animate the power up object to scale up and down
+        // This helps the player to notice the power up
         transform.DOScale(new Vector3(0.75f, 0.75f, 0.75f), 0.5f).SetLoops(-1, LoopType.Yoyo);
     }
 

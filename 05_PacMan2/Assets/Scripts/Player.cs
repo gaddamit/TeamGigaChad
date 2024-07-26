@@ -50,15 +50,9 @@ public class Player : MonoBehaviour
             return;
         }
 
-        //Lane switching logic
+        // Lane switching logic
         if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A)) runner.lane--;
         if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D)) runner.lane++;
-
-        //Capture Boost Input
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            _isJumping = true;
-        }
     }
 
     private void FixedUpdate()
@@ -81,6 +75,7 @@ public class Player : MonoBehaviour
         return speed;
     }
 
+    // Increase the player speed, called by the GameManager when scores hits a mark
     public void IncreaseSpeed()
     {
         if(speed < _speedCap)
@@ -89,6 +84,7 @@ public class Player : MonoBehaviour
         }
     }
 
+    // Called when the player dies
     public void OnDeath()
     {
         if(_isDead)
@@ -104,11 +100,13 @@ public class Player : MonoBehaviour
         Invoke("GameOver", 3.0f);
     }
 
+    // Call the GameOver method in the GameManager
     public void GameOver()
     {
         GameManager.Instance.GameOver();
     }
 
+    // Play the death animation and sound
     private void PlayDeathSequence()
     {
         if(_animator != null)

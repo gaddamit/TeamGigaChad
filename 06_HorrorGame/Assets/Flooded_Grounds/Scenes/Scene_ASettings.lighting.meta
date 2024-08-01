@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: c62fab16cd15cb5468f8fcdf7fcdc6f1
+=======
+guid: e9f7f0ab0aba64141b4c624632413435
+>>>>>>> Menu-and-Pause
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 4890085278179872738

@@ -21,6 +21,8 @@ public class EnemyStateMachine : MonoBehaviour
     #region Components
     #endregion
 
+    public GameObject Target { get; private set; }
+
     public event Action<IState> StateChanged;
 
     public EnemyStateMachine()

@@ -15,6 +15,8 @@ public class EnemyChaseState : EnemyBaseState
 
     public override void UpdateState()
     {
+        
+        // Checks if the player is in the radius given, if not return to idle state
         if (!IsInRadius(_stateMachine.Target, 10f))
         {
             _stateMachine.Target = null;

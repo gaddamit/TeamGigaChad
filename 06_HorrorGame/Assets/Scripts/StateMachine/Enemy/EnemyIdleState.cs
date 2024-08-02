@@ -25,6 +25,7 @@ public class EnemyIdleState : EnemyBaseState
         }
     }
 
+    // Starts the patrol timer if there is no target for the enemy ghost
     IEnumerator StartPatrolStateTimer()
     {
         yield return new WaitForSeconds(5f);

@@ -6,8 +6,6 @@ using UnityEngine;
 public class EnemyBaseState : IState
 {
     protected EnemyStateMachine _stateMachine;
-
-    public event Action<GameObject> TargetDetected;
     
     public EnemyBaseState(EnemyStateMachine stateMachine)
     {
@@ -21,11 +19,7 @@ public class EnemyBaseState : IState
     public virtual void PhysicsUpdate() {}
 
     public virtual void ExitState() {}
-
-    protected void Move(Vector3 motion)
-    {
-        _stateMachine.transform.position = Vector3.Lerp(_stateMachine.transform.position, motion, Time.fixedDeltaTime);
-    }
+    
 
     protected void RotateToPoint(GameObject target)
     {
@@ -34,6 +28,12 @@ public class EnemyBaseState : IState
 
     protected void SetTarget(GameObject target)
     {
-        TargetDetected?.Invoke(target);
+        _stateMachine.Agent.destination = target.transform.position;
+    }
+
+    protected bool IsInRadius(GameObject target, float distanceCheck)
+    {
+        float distance = Vector3.Distance(_stateMachine.transform.position, target.transform.position);
+        return distance < distanceCheck;
     }
 }

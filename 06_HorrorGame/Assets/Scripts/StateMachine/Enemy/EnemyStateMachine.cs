@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemyStateMachine : MonoBehaviour
 {
@@ -14,16 +15,23 @@ public class EnemyStateMachine : MonoBehaviour
     #endregion
     
     #region Serialized Variables
-    [SerializeField] public float patrolSpeed { get; private set; } = 3f;
-    [SerializeField] public float chaseSpeed { get; private set; } = 5f;
+    [field: SerializeField] public float patrolSpeed { get; private set; } = 3f;
+    [field: SerializeField] public float chaseSpeed { get; private set; } = 5f;
     #endregion
     
     #region Components
+    public NavMeshAgent Agent { get; private set; }
     #endregion
 
-    public GameObject Target { get; private set; }
+    #region State Relatedf Events
+    public event Action OnPlayerDetected;
+    #endregion
+
+    public GameObject Target = null;
 
     public event Action<IState> StateChanged;
+
+    [field: SerializeField] public GameObject[] PatrolPoints { get; private set; }
 
     public EnemyStateMachine()
     {
@@ -35,6 +43,7 @@ public class EnemyStateMachine : MonoBehaviour
     private void Awake()
     {
         InitializeState(IdleState);
+        Agent = GetComponent<NavMeshAgent>();
     }
 
     // Update is called once per frame
@@ -65,5 +74,13 @@ public class EnemyStateMachine : MonoBehaviour
         firstState.Enter();
         
         StateChanged?.Invoke(firstState);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            OnPlayerDetected?.Invoke();
+        }
     }
 }

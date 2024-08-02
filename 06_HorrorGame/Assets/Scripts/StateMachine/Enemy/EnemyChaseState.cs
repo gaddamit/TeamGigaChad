@@ -4,23 +4,31 @@ using UnityEngine;
 
 public class EnemyChaseState : EnemyBaseState
 {
-    public EnemyChaseState(EnemyStateMachine stateMachine) : base(stateMachine)
-    {
-    }
+    public EnemyChaseState(EnemyStateMachine stateMachine) : base(stateMachine) { }
 
     public override void Enter()
     {
         Debug.Log($"{_stateMachine.name} Entering Chase State");
-        TargetDetected += ChaseTarget;
+        _stateMachine.Agent.speed = _stateMachine.chaseSpeed;
+        _stateMachine.OnPlayerDetected += ChasePlayer;
     }
 
-    public override void PhysicsUpdate()
+    public override void UpdateState()
     {
-        Move(_stateMachine.transform.forward * _stateMachine.chaseSpeed);
+        if (!IsInRadius(_stateMachine.Target, 10f))
+        {
+            _stateMachine.Target = null;
+            _stateMachine.ChangeState(_stateMachine.IdleState);
+        }
     }
 
-    void ChaseTarget(GameObject target)
+    public override void ExitState()
     {
-        target = GameObject.FindGameObjectWithTag("Player");
+        _stateMachine.OnPlayerDetected -= ChasePlayer;
+    }
+
+    void ChasePlayer()
+    {
+        SetTarget(_stateMachine.Target);
     }
 }

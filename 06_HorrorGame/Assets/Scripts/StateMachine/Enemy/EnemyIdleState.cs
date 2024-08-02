@@ -15,6 +15,19 @@ public class EnemyIdleState : EnemyBaseState
 
     public override void UpdateState()
     {
-        
+        if (_stateMachine.Target.CompareTag("Player"))
+        {
+            _stateMachine.ChangeState(_stateMachine.ChaseState);
+        }
+        else if (_stateMachine.Target == null)
+        {
+            _stateMachine.StartCoroutine(StartPatrolStateTimer());
+        }
+    }
+
+    IEnumerator StartPatrolStateTimer()
+    {
+        yield return new WaitForSeconds(5f);
+        _stateMachine.ChangeState(_stateMachine.PatrolState);
     }
 }

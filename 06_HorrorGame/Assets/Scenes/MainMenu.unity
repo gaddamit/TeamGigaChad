@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311924, g: 0.38073963, b: 0.3587269, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -180,7 +180,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: BADHILL ASSYLUM
+  m_text: BADHILL ASYLUM
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8627b9e375dbb3949ab62c057d2c88c4, type: 2}
   m_sharedMaterial: {fileID: 6534047856901721068, guid: 8627b9e375dbb3949ab62c057d2c88c4, type: 2}
@@ -1331,7 +1331,7 @@ GameObject:
   - component: {fileID: 2040617035}
   - component: {fileID: 2040617034}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: BackgroundMusic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

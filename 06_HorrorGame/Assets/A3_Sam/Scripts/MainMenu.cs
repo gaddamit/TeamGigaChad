@@ -13,11 +13,6 @@ public class MainMenu : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
-
-#if UNITY_WEBGL
-        // Quit Button removed for WebGL build
-        quitButton.gameObject.SetActive(false);
-#endif
     }
 
     public void PlayGame()
@@ -29,5 +24,6 @@ public class MainMenu : MonoBehaviour
     public void QuitGame()
     {
         Application.Quit();
+        Debug.Log("Game Quit");
     }
 }

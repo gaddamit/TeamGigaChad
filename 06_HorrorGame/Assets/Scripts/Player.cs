@@ -6,7 +6,7 @@ using UnityEngine.Events;
 public class Player : MonoBehaviour
 {
     public UnityEvent OnPlayerDeath;
-
+    public UnityEvent OnPlayerCollectKey;
     private void Awake()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -26,9 +26,13 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Enemy"))
+        if (other.CompareTag("Enemy") && other.GetType() == typeof(CapsuleCollider))
         {
             OnPlayerDeath?.Invoke();
+        }
+        else if (other.CompareTag("Key"))
+        {
+            OnPlayerCollectKey?.Invoke();
         }
     }
 }

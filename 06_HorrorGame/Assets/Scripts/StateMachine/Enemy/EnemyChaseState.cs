@@ -31,6 +31,7 @@ public class EnemyChaseState : EnemyBaseState
 
     void ChasePlayer()
     {
+        Debug.Log("Chasing Player");
         SetTarget(_stateMachine.Target);
     }
 }

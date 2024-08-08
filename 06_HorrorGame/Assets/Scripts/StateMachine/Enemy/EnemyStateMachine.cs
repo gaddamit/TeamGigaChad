@@ -78,8 +78,11 @@ public class EnemyStateMachine : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log("Player detected");
         if (other.gameObject.CompareTag("Player"))
         {
+            Target = other.gameObject;
+            ChangeState(ChaseState);
             OnPlayerDetected?.Invoke();
         }
     }

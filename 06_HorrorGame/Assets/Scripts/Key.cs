@@ -23,6 +23,8 @@ public class Key : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             OnKeyCollected?.Invoke();
+            Collider collider = GetComponent<Collider>();
+            collider.enabled = false;
             Destroy(gameObject, 0.5f);
         }
     }

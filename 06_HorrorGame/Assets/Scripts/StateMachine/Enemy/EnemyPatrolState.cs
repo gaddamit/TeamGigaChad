@@ -12,12 +12,11 @@ public class EnemyPatrolState : EnemyBaseState
 
     public override void Enter()
     {
-        Debug.Log($"{_stateMachine.name} patroling");
+        
     }
 
     public override void UpdateState()
     {
-        Debug.Log("Patroling");
         _stateMachine.Target = _stateMachine.PatrolPoints[_currentPatrolPoint];
         SetTarget(_stateMachine.Target);
 
@@ -26,7 +25,6 @@ public class EnemyPatrolState : EnemyBaseState
             
             _currentPatrolPoint++;
             _currentPatrolPoint %= _stateMachine.PatrolPoints.Length;
-            Debug.Log("Next patrol point " + _currentPatrolPoint );
 
             //SetTarget(_stateMachine.PatrolPoints[_currentPatrolPoint]);
             _stateMachine.Target = null;

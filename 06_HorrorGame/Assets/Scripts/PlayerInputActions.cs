@@ -10,22 +10,12 @@ public class PlayerInputActions : MonoBehaviour
     // Start is called before the first frame update
     void OnEnable()
     {
-
-        
         if (playerInput == null)
         {
             playerInput = new InputActions();
             playerInput.menu.pause.performed += i => pauseMenu.Pause();
-            
-
         }
 
         playerInput.Enable();
-    }
-    
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

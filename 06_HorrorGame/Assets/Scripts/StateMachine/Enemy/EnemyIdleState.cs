@@ -11,17 +11,15 @@ public class EnemyIdleState : EnemyBaseState
 
     public override void Enter()
     {
-        Debug.Log($"{_stateMachine.name} Idling");
+    
     }
 
     public override void UpdateState()
     {
-        //Debug.Log("Checking for target" + _stateMachine.Target.name);
         if(_stateMachine.Target == null)
         {
             if(_patrolCoroutine == null)
             {
-                Debug.Log("No target found, starting patrol state");
                 _patrolCoroutine = _stateMachine.StartCoroutine(StartPatrolStateTimer());
             }
         }

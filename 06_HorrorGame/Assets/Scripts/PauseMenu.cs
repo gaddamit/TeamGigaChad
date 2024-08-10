@@ -20,22 +20,29 @@ public class PauseMenu : MonoBehaviour
 
     public void Pause()
     {
-        pauseMenu.SetActive(true);
-        ShowPauseMenu();
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+
+        if(pauseMenu)
+        {
+            pauseMenu?.SetActive(true);
+        }
+        //ShowPauseMenu();
         Time.timeScale = 0; 
     }
 
     public void Home()
     {
-        
-
-        HidePauseMenu();
+        //HidePauseMenu();
         SceneManager.LoadScene("MainMenu");
         Time.timeScale = 1;
     }
 
     public void Resume()
     {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        
         HidePauseMenu();
 
         pauseMenu.SetActive(false);
@@ -44,8 +51,6 @@ public class PauseMenu : MonoBehaviour
 
     public void Restart()
     {
-        
-
         HidePauseMenu();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         Time.timeScale = 1;

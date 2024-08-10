@@ -8,7 +8,6 @@ public class EnemyChaseState : EnemyBaseState
 
     public override void Enter()
     {
-        Debug.Log($"{_stateMachine.name} Entering Chase State");
         _stateMachine.Agent.speed = _stateMachine.chaseSpeed;
         _stateMachine.OnPlayerDetected += ChasePlayer;
     }
@@ -31,7 +30,6 @@ public class EnemyChaseState : EnemyBaseState
 
     void ChasePlayer()
     {
-        Debug.Log("Chasing Player");
         SetTarget(_stateMachine.Target);
     }
 }

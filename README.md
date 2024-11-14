@@ -15,7 +15,7 @@ Slip into the gloves of Pacquito, a celebrated Filipino boxer known for his ligh
 
 Pac-Runner is an endless runner game where you can collect points to increase your score while whizzing your way through enemies that hinder your path. Survive as long as you can with the help of powerups and your fast reflexes.
 
-## [Badhill Asylum](https://gaddamit.itch.io/badhill-asylum) (Inspired By Game)
+## [Badhill Asylum](https://gaddamit.itch.io/badhill-asylum) (Different Platform Game)
 Once a state-of-the-art facility for the mentally ill, it was abandoned after a series of disturbing events in the 1980s. The asylum’s walls, now draped in decay, whisper of the nightmares that once dwelled within.
 
 Now, evil lurks in the walls of Badhill Asylum and you must get out before they get you. You must collect the keys scattered around the level and find your way out. It will not be an easy task for the grounds are haunted.

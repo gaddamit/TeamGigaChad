@@ -1,4 +1,6 @@
 # Team GigaChad
+[![Made with Unity](https://img.shields.io/badge/Made%20with-Unity-57b9d3.svg?style=flat&logo=unity)](https://unity3d.com)
+
 Project collection for Game1501 - Rapid Prototyping
 
 ## [Fish Flop](https://gaddamit.itch.io/fish-flop) (One Button Game)
